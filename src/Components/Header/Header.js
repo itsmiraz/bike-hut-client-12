@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <div className='bg-white  text-slate-900 items-center md:px-10 px-4 py-3 flex justify-between w-full'>
 
-           <img className='w-40' src={logo} alt="" />
+            <img className='w-40' src={logo} alt="" />
 
             <div>
                 <ul className={`md:flex bg-white right-0 z-0 items-center w-full text-slate-900 text-center justify-center md:static duration-300 ease-linear absolute ${open ? 'top-12' : 'top-[-450px]'}`}>
@@ -23,10 +23,13 @@ const Header = () => {
                         <Link>Books</Link>
                     </li>
                     <li className='font-semibold mr-4'>
-                    <button type="button" className="px-4 py-2 font-semibold rounded-full border border-teal-500 text-gray-800">Sign In</button>
+                        <Link to='/login'>
+                            <button type="button" className="px-4 py-2 font-semibold rounded-full border border-teal-500 text-gray-800">Sign In</button>
+
+                        </Link>
                     </li>
                     <li className='font-semibold mr-4'>
-                    <button type="button" className="px-4 py-2 font-semibold rounded-full bg-teal-500 text-white">Sing Out</button>
+                        <button type="button" className="px-4 py-2 font-semibold rounded-full bg-teal-500 text-white">Sing Out</button>
                     </li>
 
                 </ul>
