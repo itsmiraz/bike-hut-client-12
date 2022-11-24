@@ -11,13 +11,10 @@ const Regiseter = () => {
     const [err, setErr] = useState('')
     const [createdUserEmail, setuserEmail] = useState('')
     const navigate = useNavigate()
-    // const [token] = useToken(createdUserEmail)
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
 
-    // if(token){
-    //     navigate('/')
-    // }
+   
 
     // context
     const { signUp, updateUser } = useContext(AuthContext)
@@ -28,43 +25,49 @@ const Regiseter = () => {
     const handleSignup = data => {
         console.log(data)
         
-        // signUp(data.email, data.password)
-        //     .then(result => {
+        signUp(data.email, data.password)
+            .then(result => {
 
-        //         const userInfo = {
-        //             displayName: data.name
-        //         }
+                const userInfo = {
+                    displayName: data.name
+                }
 
-        //         updateUser(userInfo)
-        //             .then(() => {
-        //                 // saveUser(data.name, data.email);
-        //             })
-        //             .catch(err => console.log(err));
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email,data.accountType);
+                    })
+                    .catch(err => console.log(err));
 
-        //         console.log(result)
+                console.log(result)
 
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setErr(error.message)
-        //     })
+            })
+            .catch(error => {
+                console.log(error);
+                setErr(error.message)
+            })
     }
 
-    // // save user to db
-    // const saveUser = (name, email) => {
-    //     const user = { name, email }
-    //     fetch('http://localhost:5000/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setuserEmail(email)
-    //         })
-    // }
+    // save user to db
+    const saveUser = (name, email ,type) => {
+        const user = { name, email,type }
+        fetch(`http://localhost:5000/user/${email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    localStorage.setItem('bikehutAccessToken', data.data)
+                    setTimeout(() => {
+                        navigate(from, { replace: true })
+
+                    }, 300);
+                  }
+            })
+    }
 
 
 
@@ -87,7 +90,7 @@ const Regiseter = () => {
                             <label className="label">
                                 <span className="label-text font-semibold">Which Type of Account do you want to create?</span>
                             </label>
-                            <select {...register('account-type', { required: 'User is Required' })} className="select select-bordered w-full ">
+                            <select {...register('accountType', { required: 'User is Required' })} className="select select-bordered w-full ">
                                 <option value='Buyer'>Buyer</option>
                                 <option>Seller</option>
                               

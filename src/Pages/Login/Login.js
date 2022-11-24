@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
   // userContext
-  const { singIN,         googleSginIn,  } = useContext(AuthContext);
+  const { signIn, googleSginIn,  } = useContext(AuthContext);
 
   const {
     register,
@@ -19,19 +18,21 @@ const Login = () => {
   const location = useLocation();
   const [err, seterr] = useState("");
   const from = location.state?.from?.pathname || "/";
-  const [email, setEmail] = useState("");
+ 
 
-//   const [token] = useToken(email);
 
-//   if (token) {
-//     navigate(from, { replace: true });
-//   }
 
   const handleLogin = (data) => {
     console.log(data);
-    singIN(data.email, data.password)
+    signIn(data.email, data.password)
       .then((result) => {
-        setEmail(data.email);
+        const user = result.user;
+        toast.success('Logined SuccessFully')
+       
+
+        saveUser(user.displayName,user.email)
+
+
       })
       .catch((error) => {
         console.log(error);
@@ -44,8 +45,9 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // saveUser(user.displayName, user.email);
-      
+        const type = 'Buyer'
+        saveUser(user.displayName, user.email,type);
+        
       })
       .catch((error) => {
         console.log(error);
@@ -54,42 +56,31 @@ const Login = () => {
   };
 
   // save user to db
-//   const saveUser = (name, email) => {
-//     const user = { name, email };
-//     console.log("saveuser", user);  
-//     fetch("http://localhost:5000/users", {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
+  const saveUser = (name, email,type) => {
+    const user = { name, email,type };
+    console.log("saveuser", user);  
+    fetch(`http://localhost:5000/user/${email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
        
-//       },
-//       body: JSON.stringify(user),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data, email);
-//         if (data.acknowledged) {
-//           fetch(`http://localhost:5000/jwt?email=${email}`, {
-//             method: 'POST',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//             body: JSON.stringify(user)
-//         })
-//             .then(res => res.json())
-//             .then(data => {
-//                 localStorage.setItem('accesToken', data.token)
-//                 toast.success('Logined SuccessFully')
-//                 setTimeout(() => {
-//                     navigate(from, { replace: true })
-  
-//                 }, 500);
-//             })
-//           navigate("/");
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, );
+        if (data.status === 'success') {
+          localStorage.setItem('bikehutAccessToken', data.data)
+          setTimeout(() => {
+            navigate(from, { replace: true })
+
+        }, 300);
+       }
           
-//         }
-//       });
-//   };
+        
+      });
+  };
 
   return (
     <div className="flex mb-10 justify-center h-[600px] items-center">
