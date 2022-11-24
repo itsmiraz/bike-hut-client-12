@@ -5,26 +5,32 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/UserContext';
-
+import { compareAsc, format } from 'date-fns'
+import { useNavigate } from 'react-router-dom';
 const AddAproduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imgHostKey = process.env.REACT_APP_imgbbKey
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const data = new Date()
+    const date = format(data, 'PP')
+    console.log(date);
 
     const handleAddaProduct = (data) => {
         const image = data.image[0];
         const formData = new FormData();
-        formData.append('image',image);
+        formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
-        fetch(url,{
-            method:'POST',
+        fetch(url, {
+            method: 'POST',
             body: formData,
         })
             .then(res => res.json())
-            .then(imgData=>{
+            .then(imgData => {
 
                 if (imgData.success) {
-                    
+
                     const bikedetails = {
                         model: data.model,
                         image: imgData.data.url,
@@ -33,10 +39,13 @@ const AddAproduct = () => {
                         totalDriven: data.totalDriven,
                         orginalPrice: data.orginalPrice,
                         resalePrice: data.resalePrice,
-                        sellerNumber:data.sellerNumber,
+                        sellerNumber: data.sellerNumber,
                         sellerLocation: data.sellerLocation,
                         sellerEmail: user?.email,
-                        sellerName: user?.displayName,  
+                        bikedetails: data.details,
+                        postdate: date,
+                        status:'available',
+                        sellerName: user?.displayName,
                     }
 
                     console.log(bikedetails)
@@ -45,16 +54,17 @@ const AddAproduct = () => {
                         headers: {
                             'content-type': 'application/json'
                         },
-                        body:JSON.stringify(bikedetails)
+                        body: JSON.stringify(bikedetails)
                     })
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
                                 console.log(data);
                                 toast.success('Product Added SuccessFully')
+                                navigate('/dashboard/myproducts')
                             }
-                          
-                    })
+
+                        })
 
 
 
@@ -67,7 +77,7 @@ const AddAproduct = () => {
 
 
 
-    const {data:brands=[],} = useQuery({
+    const { data: brands = [], } = useQuery({
         queryKey: ['brand'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/catagories')
@@ -88,28 +98,29 @@ const AddAproduct = () => {
                             <span className="label-text font-semibold">Image</span>
                         </label>
                         <input
-                         {...register('image', { required: 'image is Required' })}
+                            {...register('image', { required: true })}
                             type="file" className="file-input w-full max-w-xs" />
+                        {errors.image && <span className='mx-2'>This field is required</span>}
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Bike Model</span>
                         </label>
                         <input type='text'
-                            {...register('model', { required: 'model is Required' })}
+                            {...register('model', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="Bike Model" />
-
+                        {errors.model && <span className='mx-2'>This field is required</span>}
                     </div>
-                     
+
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Brand</span>
                         </label>
-                        <select {...register('brand', { required: 'brand is Required' })} className="select select-bordered w-full ">
+                        <select {...register('brand', { required: true })} className="select select-bordered w-full ">
                             <option value='Buyer'>Select Brand</option>
                             {
-                                brands.map((brand,i) => <option
-                                key={i}
+                                brands.map((brand, i) => <option
+                                    key={i}
                                 >
                                     {brand.name}
                                 </option>)
@@ -117,6 +128,7 @@ const AddAproduct = () => {
                             <option>Other</option>
 
                         </select>
+                        {errors.brand && <span className='mx-2'>This field is required</span>}
 
 
                     </div>
@@ -124,13 +136,14 @@ const AddAproduct = () => {
                         <label className="label">
                             <span className="label-text font-semibold">Condition</span>
                         </label>
-                        <select {...register('condition', { required: 'condition is Required' })} className="select select-bordered w-full ">
+                        <select {...register('condition', { required: true })} className="select select-bordered w-full ">
                             <option value='Select Condition' disabled>Select Condition</option>
                             <option>New</option>
                             <option>Fresh</option>
                             <option>Used</option>
 
                         </select>
+                        {errors.condition && <span className='mx-2'>This field is required</span>}
 
 
                     </div>
@@ -139,49 +152,66 @@ const AddAproduct = () => {
                             <span className="label-text font-semibold">How Many km have driven?</span>
                         </label>
                         <input type='text'
-                            {...register('totalDriven', { required: 'Required' })}
+                            {...register('totalDriven', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="000 k/m" />
+                        {errors.totalDriven && <span className='mx-2'>This field is required</span>}
+
+                    </div>
+                    <div>
+                        <label className="label">
+                            <span className="label-text font-semibold">Details</span>
+                        </label>
+                        <textarea type='text'
+                            {...register('details', { required: true })}
+                            className='input input-bordered h-32 w-full my-2' placeholder="Details" />
+                        {errors.details && <span className='mx-2'>This field is required</span>}
+
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Orginal Price</span>
                         </label>
                         <input type='text'
-                            {...register('orginalPrice', { required: 'Required' })}
+                            {...register('orginalPrice', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="Orginal Price" />
+                        {errors.orginalPrice && <span className='mx-2'>This field is required</span>}
+
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Resale Price</span>
                         </label>
                         <input type='text'
-                            {...register('resalePrice', { required: 'Required'})}
+                            {...register('resalePrice', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="Resale Price" />
 
+                        {errors.resalePrice && <span className='mx-2'>This field is required</span>}
 
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Phone Number</span>
                         </label>
-                        <input  type='text'
-                            {...register('sellerNumber', { required: 'Required' })}
+                        <input type='text'
+                            {...register('sellerNumber', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="Number" />
 
+                        {errors.sellerNumber && <span className='mx-2'>This field is required</span>}
 
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Location</span>
                         </label>
-                        <input  type='text'
-                            {...register('sellerLocation', { required: 'Required' })}
+                        <input type='text'
+                            {...register('sellerLocation', { required: true })}
                             className='input input-bordered w-full my-2' placeholder="location" />
 
+                        {errors.sellerLocation && <span className='mx-2'>This field is required</span>}
 
                     </div>
 
-                    <input value='Add Product' className='btn w-full my-2' type="submit" />
+                    <input value='Post' className='btn w-full my-2' type="submit" />
                 </form>
             </div>
         </div>

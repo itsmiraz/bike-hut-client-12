@@ -37,7 +37,7 @@ const Header = () => {
                         <Link>Blogs</Link>
                     </li>
                     <li className='font-semibold mr-4'>
-                        <Link to='/dashboard'>Dashboard</Link>
+                        <Link to='/dashboard/userpage'>Dashboard</Link>
                     </li>
                     {
                         user?.uid ?

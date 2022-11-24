@@ -1,11 +1,13 @@
 import React from 'react';
 
-const MyBikesCard = ({ bike }) => {
+const MyBikesCard = ({ bike,handleDelete }) => {
     console.log(bike);
 
     const {
+        _id,
         model,
         image,
+        postdate,
         brand,
         condition,
         totalDriven,
@@ -16,6 +18,9 @@ const MyBikesCard = ({ bike }) => {
         sellerEmail,
         sellerName
     } = bike;
+
+
+    
 
     return (
         <div>
@@ -36,7 +41,7 @@ const MyBikesCard = ({ bike }) => {
                 </div>
                 <div>
                     <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
-                    <p>time</p>
+                    <p>{  postdate}</p>
                     <p>{sellerNumber}</p>
                 </div>
                 <div>
@@ -62,8 +67,8 @@ const MyBikesCard = ({ bike }) => {
 
                         </label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-gray-100 rounded-box w-52">
-                            <li><button className='text-yellow-500'>Sold</button></li>
-                            <li><button className='text-red-500'>Delete</button></li>
+                            <li><button className=''>Sold</button></li>
+                            <li><button onClick={()=>handleDelete(_id)} className='text-red-500'>Delete</button></li>
                         </ul>
                     </div>
                 </div>

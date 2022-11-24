@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 
 const Catagories = () => {
@@ -26,7 +27,9 @@ const Catagories = () => {
                 {
                     catagorires.map((catagory,i) =>
                         <div key={i}>
+                            <Link to={`/products/${catagory.name}`}>
                             <img src={ catagory.img} className='w-40  p-2' alt="" />
+                            </Link>
 
                     </div>)
                 }

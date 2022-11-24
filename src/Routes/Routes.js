@@ -1,5 +1,6 @@
 
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
+import Bikes from "../Pages/Bikes/Bikes";
 import AddAproduct from "../Pages/Dashboard/AddAproduct/AddAproduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
@@ -9,7 +10,6 @@ import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
 import UserPage from "../Pages/Dashboard/UserPage/UserPage";
 import Login from "../Pages/Login/Login";
-import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
@@ -35,9 +35,9 @@ export const router = createBrowserRouter([
                 element: <Register></Register>
             },
             {
-                path: '/products/:id',
-                loader: ({ params }) => fetch(''),
-                element:<Products></Products>
+                path: '/products/:catagory',
+                loader: ({ params }) => fetch(`http://localhost:5000/bikes/${params.catagory}`),
+                element:<Bikes></Bikes>
             }
         ]
     },
