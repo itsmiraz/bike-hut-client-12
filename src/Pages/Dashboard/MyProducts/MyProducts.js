@@ -40,6 +40,19 @@ const MyProducts = () => {
     }
 
 
+    const handleSold = (id) => {
+        fetch(`http://localhost:5000/bike/${id}`, {
+            method:'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+                toast.success('Product Sold')
+        })
+    }
+
+
     return (
         <div className='h-screen'>
             <h1 className='text-xl font-semibold'>My Bikes {bikes.length}</h1>
@@ -50,6 +63,7 @@ const MyProducts = () => {
                         key={bike._id}
                         bike={bike}
                         handleDelete={handleDelete}
+                        handleSold={handleSold}
                     ></MyBikesCard>)
                 }
 

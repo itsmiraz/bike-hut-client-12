@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyBikesCard = ({ bike,handleDelete }) => {
+const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
     console.log(bike);
 
     const {
@@ -8,15 +8,14 @@ const MyBikesCard = ({ bike,handleDelete }) => {
         model,
         image,
         postdate,
-        brand,
         condition,
         totalDriven,
         orginalPrice,
         resalePrice,
         sellerNumber,
         sellerLocation,
-        sellerEmail,
-        sellerName
+        status,
+
     } = bike;
 
 
@@ -40,7 +39,17 @@ const MyBikesCard = ({ bike,handleDelete }) => {
                     </div>
                 </div>
                 <div>
-                    <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
+                    {
+                        status === 'available' ? 
+                            <>
+                            <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
+                            </>
+                            :
+                            <>
+                            <p  className='bg-red-500 w-14 text-white rounded-full px-3'>Sold</p>
+                            
+                            </>
+                    }
                     <p>{  postdate}</p>
                     <p>{sellerNumber}</p>
                 </div>
@@ -67,7 +76,9 @@ const MyBikesCard = ({ bike,handleDelete }) => {
 
                         </label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-gray-100 rounded-box w-52">
-                            <li><button className=''>Sold</button></li>
+                            <li><button onClick={() => handleSold(_id)} className=''>
+                               { status === 'available' && 'Sold' }
+                            </button></li>
                             <li><button onClick={()=>handleDelete(_id)} className='text-red-500'>Delete</button></li>
                         </ul>
                     </div>
