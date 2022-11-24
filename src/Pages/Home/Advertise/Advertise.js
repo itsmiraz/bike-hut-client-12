@@ -33,7 +33,7 @@ const Advertise = () => {
                         key={bike.id}
                         bike={bike}
                     
-                    ></BikeCard>)
+                    ></BikeCard>)   
                 }
             </div>
         </div>
