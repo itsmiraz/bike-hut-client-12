@@ -14,7 +14,7 @@ const Header = () => {
             <div>
                 <ul className={`md:flex bg-white right-0 z-0 items-center w-full text-slate-900 text-center justify-center md:static duration-300 ease-linear absolute ${open ? 'top-12' : 'top-[-450px]'}`}>
                     <li className='font-semibold mr-4'>
-                        <Link>Home</Link>
+                        <Link to='/'>Home</Link>
                     </li>
                     <li className='font-semibold mr-4'>
                         <Link>Rooms</Link>

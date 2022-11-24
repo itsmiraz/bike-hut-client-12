@@ -27,26 +27,27 @@ const Regiseter = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const handleSignup = data => {
         console.log(data)
-        signUp(data.email, data.password)
-            .then(result => {
+        
+        // signUp(data.email, data.password)
+        //     .then(result => {
 
-                const userInfo = {
-                    displayName: data.name
-                }
+        //         const userInfo = {
+        //             displayName: data.name
+        //         }
 
-                updateUser(userInfo)
-                    .then(() => {
-                        // saveUser(data.name, data.email);
-                    })
-                    .catch(err => console.log(err));
+        //         updateUser(userInfo)
+        //             .then(() => {
+        //                 // saveUser(data.name, data.email);
+        //             })
+        //             .catch(err => console.log(err));
 
-                console.log(result)
+        //         console.log(result)
 
-            })
-            .catch(error => {
-                console.log(error);
-                setErr(error.message)
-            })
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setErr(error.message)
+        //     })
     }
 
     // // save user to db
@@ -86,10 +87,10 @@ const Regiseter = () => {
                             <label className="label">
                                 <span className="label-text font-semibold">Which Type of Account do you want to create?</span>
                             </label>
-                            <select {...register('user', { required: 'User is Required' })} className="select select-bordered w-full ">
-                                <option disabled selected>Select One</option>
+                            <select {...register('account-type', { required: 'User is Required' })} className="select select-bordered w-full ">
+                                <option value='Buyer'>Buyer</option>
                                 <option>Seller</option>
-                                <option>Normal User</option>
+                              
                             </select>
                          
 
