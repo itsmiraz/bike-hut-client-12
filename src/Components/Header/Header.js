@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import logo from '../../assets/Logo/BIKEHUTLOGO.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/UserContext';
 
 
 const Header = () => {
 
-    
-
+    const {user } = useContext(AuthContext)
+ 
     const [open, setOpen] = useState(false)
     return (
         <div className='bg-white  text-slate-900 items-center md:px-10 px-4 py-3 flex justify-between w-full'>
