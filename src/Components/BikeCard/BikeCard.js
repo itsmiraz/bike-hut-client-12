@@ -19,7 +19,7 @@ const BikeCard = ({ bike }) => {
     } = bike;
     return (
         <div>
-            <div className='font-semibold rounded-lg shadow-lg border p-4 relative w-[450px]'>
+            <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-[450px]'>
                 <p>Seller : {sellerName}</p>
                 <img src={image} className='w-96' alt="" />
 
@@ -56,13 +56,13 @@ const BikeCard = ({ bike }) => {
                 {
                     status === 'available' ?
                         <>
-                            <p className='bg-green-500 shadow-lg absolute top-2 right-2 w-24 px-4 py-2 rounded-full text-white'>
+                            <p className='bg-green-500 shadow-lg absolute top-4 right-4 w-24 px-4 py-2 rounded-full text-white'>
                                 Available
                             </p>
                         </>
                         :
                         <>
-                            <p className='bg-red-500 shadow-lg absolute top-2 right-2 w-16 px-4 py-2 rounded-full text-white'>
+                            <p className='bg-red-500 shadow-lg absolute top-4 right-4 w-16 px-4 py-2 rounded-full text-white'>
                                 Sold
                             </p>
                         </>
