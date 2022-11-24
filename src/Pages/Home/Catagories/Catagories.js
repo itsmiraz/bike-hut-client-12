@@ -19,7 +19,7 @@ const Catagories = () => {
     }
 
     return (
-        <div className='my-10'>
+        <div className='my-20'>
             <h1 className='text-center text-xl font-semibold'>Catagories : {catagorires.length}</h1>
             
             <div className='flex px-20 items-center justify-around'>
