@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/UserContext';
 
 const AddAproduct = () => {
@@ -24,7 +25,7 @@ const AddAproduct = () => {
 
                 if (imgData.success) {
                     
-                    const product = {
+                    const bikedetails = {
                         model: data.model,
                         image: imgData.data.url,
                         brand: data.brand,
@@ -35,13 +36,25 @@ const AddAproduct = () => {
                         sellerNumber:data.sellerNumber,
                         sellerLocation: data.sellerLocation,
                         sellerEmail: user?.email,
-                        sellerName: user?.displayName,
-                    
-                        
+                        sellerName: user?.displayName,  
                     }
 
-                    console.log(product)
-
+                    console.log(bikedetails)
+                    fetch('http://localhost:5000/addbikes', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body:JSON.stringify(bikedetails)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                console.log(data);
+                                toast.success('Product Added SuccessFully')
+                            }
+                          
+                    })
 
 
 
