@@ -52,6 +52,18 @@ const MyProducts = () => {
         })
     }
 
+    const handleAdvertise = (id) => {
+        fetch(`http://localhost:5000/advertiseBike/${id}`, {
+            method:'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch()
+                toast.success('Product is Live on Ad Section')
+        })
+    }
+
 
     return (
         <div className='h-screen'>
@@ -64,6 +76,7 @@ const MyProducts = () => {
                         bike={bike}
                         handleDelete={handleDelete}
                         handleSold={handleSold}
+                        handleAdvertise={handleAdvertise}
                     ></MyBikesCard>)
                 }
 

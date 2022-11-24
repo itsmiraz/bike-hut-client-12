@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
+const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise }) => {
     console.log(bike);
 
     const {
@@ -19,7 +19,7 @@ const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
     } = bike;
 
 
-    
+
 
     return (
         <div>
@@ -27,7 +27,7 @@ const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
                 <img className='w-32' src={image} alt="" />
                 <div>
                     <h1 className='text-xl'>
-                        {model.slice(0,15)}
+                        {model.slice(0, 15)}
                     </h1>
                     <div>
                         <p>
@@ -40,17 +40,17 @@ const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
                 </div>
                 <div>
                     {
-                        status === 'available' ? 
+                        status === 'available' ?
                             <>
-                            <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
+                                <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
                             </>
                             :
                             <>
-                            <p  className='bg-red-500 w-14 text-white rounded-full px-3'>Sold</p>
-                            
+                                <p className='bg-red-500 w-14 text-white rounded-full px-3'>Sold</p>
+
                             </>
                     }
-                    <p>{  postdate}</p>
+                    <p>{postdate}</p>
                     <p>{sellerNumber}</p>
                 </div>
                 <div>
@@ -76,10 +76,21 @@ const MyBikesCard = ({ bike,handleDelete ,handleSold}) => {
 
                         </label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-gray-100 rounded-box w-52">
-                            <li><button onClick={() => handleSold(_id)} className=''>
-                               { status === 'available' && 'Sold' }
-                            </button></li>
-                            <li><button onClick={()=>handleDelete(_id)} className='text-red-500'>Delete</button></li>
+
+                            {status === 'available' && <>
+                                <li>
+                                    <button onClick={() => handleSold(_id)} >
+                                        Sold
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={() => handleAdvertise(_id)}>
+                                        Advertise
+                                    </button>
+                                </li>
+                            </>}
+
+                            <li><button onClick={() => handleDelete(_id)} className='text-red-500'>Delete</button></li>
                         </ul>
                     </div>
                 </div>
