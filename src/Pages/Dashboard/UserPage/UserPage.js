@@ -25,7 +25,7 @@ const UserPage = () => {
             <img className='w-40 mx-auto' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU' alt="" />
                 <h1 className='text-xl font-semibold text-center my-2'>{user?.displayName}</h1>  
                 <h1 className='text-center font-semibold my-2'>{user?.email}</h1>
-                <p className='text-center font-semibold'>Account Type : {userdb.role }</p>
+                <p className='text-center font-semibold'>Account Type : {userdb[0].role }</p>
           </div>
 
 

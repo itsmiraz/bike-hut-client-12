@@ -6,9 +6,31 @@ const BookNowModal = ({ bikedetails, setBikedetails }) => {
 
     const { user } = useContext(AuthContext)
     
+    const {
+        _id,
+        model,
+        image,
+        resalePrice,
+
+    } = bikedetails;
+
     const handlebook = e => {
         e.preventDefault()
         setBikedetails(null)
+        const form = e.target;
+
+        const bookedDetails = {
+            buyerEmail: user?.email,
+            img: image,
+            bikeModel: model,
+            bikePrice: resalePrice,
+            bikeId: _id,
+            meetLocation: form.location.value,
+            buyerNumber:form.number.value,
+        }
+        console.log(bookedDetails)
+
+
     }
     return (
         <div>
@@ -34,25 +56,25 @@ const BookNowModal = ({ bikedetails, setBikedetails }) => {
                             <span className="label-text">Bike Model</span>
                           
                         </label>
-                        <input readOnly defaultValue={bikedetails.model} type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
+                        <input readOnly defaultValue={model} type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
                        
                         <label className="label">
                             <span className="label-text">Price (Tk)</span>
                           
                         </label>
-                        <input readOnly defaultValue={bikedetails.resalePrice} type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
+                        <input readOnly defaultValue={resalePrice} type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
                         
                         <label className="label">
                             <span className="label-text">Meeting Location</span>
                           
                         </label>
-                        <input required type="text" placeholder="Location" className="input input-bordered w-full my-2" />
+                        <input name='location' required type="text" placeholder="Location" className="input input-bordered w-full my-2" />
                        
                         <label className="label">
                             <span className="label-text">Phone Number</span>
                           
                         </label>
-                        <input required type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
+                        <input name='number' required type="text" placeholder="Type here" className="input input-bordered w-full my-2" />
                         <button type='submit' className='w-full bg-teal-500 text-white font-semibold py-3 my-2 rounded-lg'>Submit</button>
                     </form>
                 </div>
