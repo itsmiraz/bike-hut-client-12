@@ -9,7 +9,7 @@ const Advertise = () => {
     const [advertisedBikes, setAdvertiseBike] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/allbikecollection')
+        fetch('https://bike-hut-server.vercel.app/allbikecollection')
             .then(res => res.json())
             .then(data => {
                 const adBikes = data.filter(bike => bike.advertise === 'true');
@@ -25,9 +25,9 @@ const Advertise = () => {
                 advertisedBikes.length === 0 ? <></>
                     :
                     <>
-                      <div className='my-20 py-10 bg-gray-200'>
-            <h1 className='text-xl font-semibold text-center'>Advertise Bikes {advertisedBikes?.length}</h1>
-            <div className='px-20 justify-items-center grid-cols-2 grid '>
+                      <div className='my-20   bg-gray-200'>
+            <h1 className='text-xl font-semibold py-10 text-center'>Advertise Bikes </h1>
+            <div className='px-20 pb-10 gap-10 justify-items-center grid-cols-2 grid '>
                 {
                     advertisedBikes.map(bike => <BikeCard
                         key={bike.id}

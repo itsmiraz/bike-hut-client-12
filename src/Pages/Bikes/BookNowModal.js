@@ -30,7 +30,7 @@ const BookNowModal = ({ bikedetails, setBikedetails }) => {
             buyerNumber:form.number.value,
         }
         console.log(bookedDetails)
-        fetch(`http://localhost:5000/book`, {
+        fetch(`https://bike-hut-server.vercel.app/book`, {
             method: 'POST',
             headers: {
                 'content-type':'application/json'

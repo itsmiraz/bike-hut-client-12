@@ -49,7 +49,7 @@ const AddAproduct = () => {
                     }
 
                     console.log(bikedetails)
-                    fetch('http://localhost:5000/addbikes', {
+                    fetch('https://bike-hut-server.vercel.app/addbikes', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -80,7 +80,7 @@ const AddAproduct = () => {
     const { data: brands = [], } = useQuery({
         queryKey: ['brand'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/catagories')
+            const res = await fetch('https://bike-hut-server.vercel.app/catagories')
             const data = await res.json()
             return data;
         }

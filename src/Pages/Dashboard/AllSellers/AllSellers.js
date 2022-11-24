@@ -7,7 +7,7 @@ const AllSellers = () => {
 
     const [sellers, setsellers] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://bike-hut-server.vercel.app/user')
             .then(res => res.json())
             .then(data => {
                 const users = data.filter(user => user.role === 'Seller')

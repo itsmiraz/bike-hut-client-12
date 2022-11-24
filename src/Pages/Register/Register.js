@@ -50,7 +50,7 @@ const Regiseter = () => {
     // save user to db
     const saveUser = (name, email ,role) => {
         const user = { name, email,role }
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://bike-hut-server.vercel.app/user/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
