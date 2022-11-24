@@ -48,8 +48,8 @@ const Regiseter = () => {
     }
 
     // save user to db
-    const saveUser = (name, email ,type) => {
-        const user = { name, email,type }
+    const saveUser = (name, email ,role) => {
+        const user = { name, email,role }
         fetch(`http://localhost:5000/user/${email}`, {
             method: 'PUT',
             headers: {

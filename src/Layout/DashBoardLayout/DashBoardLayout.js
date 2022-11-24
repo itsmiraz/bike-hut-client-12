@@ -7,7 +7,7 @@ const DashBoardLayout = () => {
     return (
         <div>
             <Header></Header>
-            <div className="drawer drawer-mobile">
+            <div className="drawer font-semibold drop-shadow-2xl drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content relative flex flex-col items-center justify-center">
                     <Outlet></Outlet>
@@ -24,6 +24,7 @@ const DashBoardLayout = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         {/* Buyer */}
+                        <li><Link to='/dashboard/userpage'>Profile</Link></li>
                         <li><Link to='/dashboard/myorders'>My orders</Link></li>
 
                         {/* Seller */}

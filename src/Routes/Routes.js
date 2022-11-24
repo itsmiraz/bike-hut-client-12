@@ -7,9 +7,11 @@ import MyOrders from "../Pages/Dashboard/My orders/MyOrders";
 import Mybuyers from "../Pages/Dashboard/Mybuyers/Mybuyers";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
+import UserPage from "../Pages/Dashboard/UserPage/UserPage";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../Layout/Main/Main");
@@ -41,7 +43,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashBoardLayout></DashBoardLayout>,
+        element: <PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard/myorders',
@@ -70,6 +72,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element:<ReportedItems></ReportedItems>
+            },
+            {
+                path: '/dashboard/userpage',
+                element:<UserPage></UserPage>
             }
         ]
     }

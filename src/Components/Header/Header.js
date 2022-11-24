@@ -8,9 +8,21 @@ import { AuthContext } from '../../Context/UserContext';
 
 const Header = () => {
 
-    const {user } = useContext(AuthContext)
- 
+    const { user, logOut, } = useContext(AuthContext)
+
     const [open, setOpen] = useState(false)
+
+
+    const handleSingOut = () => {
+        logOut()
+            .then(result => {
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     return (
         <div className='bg-white  text-slate-900 items-center md:px-10 px-4 py-3 flex justify-between w-full'>
 
@@ -22,20 +34,41 @@ const Header = () => {
                         <Link to='/'>Home</Link>
                     </li>
                     <li className='font-semibold mr-4'>
-                        <Link>Rooms</Link>
+                        <Link>Blogs</Link>
                     </li>
                     <li className='font-semibold mr-4'>
                         <Link to='/dashboard'>Dashboard</Link>
                     </li>
-                    <li className='font-semibold mr-4'>
-                        <Link to='/login'>
-                            <button type="button" className="px-4 py-2 font-semibold rounded-full border border-teal-500 text-gray-800">Sign In</button>
+                    {
+                        user?.uid ?
 
-                        </Link>
-                    </li>
-                    <li className='font-semibold mr-4'>
-                        <button type="button" className="px-4 py-2 font-semibold rounded-full bg-teal-500 text-white">Sing Out</button>
-                    </li>
+                            <>
+
+                                <li className='font-semibold mr-4'>
+                                    <img className='w-10 rounded-full h-10' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU' alt="" />
+
+                                </li>
+
+                                <li className='font-semibold mr-4'>
+                                    <button onClick={handleSingOut}  type="button" className="px-4 py-2 font-semibold rounded-full border border-teal-500 text-gray-800">Sign Out</button>
+
+                                </li>
+
+                            </>
+                            :
+                            <>
+                                <li className='font-semibold mr-4'>
+                                    <Link to='/login'>
+                                        <button type="button" className="px-4 py-2 font-semibold rounded-full border border-teal-500 text-gray-800">Sign In</button>
+
+                                    </Link>
+                                </li>
+                                <li className='font-semibold mr-4'>
+                                    <button type="button" className="px-4 py-2 font-semibold rounded-full bg-teal-500 text-white">Sing Out</button>
+                                </li>
+
+                            </>
+                    }
 
                 </ul>
                 <div onClick={() => setOpen(!open)} className="h-8 p-1 z-40 rounded-full bg-teal-500 text-white w-8 md:hidden" >

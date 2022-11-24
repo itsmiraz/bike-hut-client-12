@@ -45,8 +45,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        const type = 'Buyer'
-        saveUser(user.displayName, user.email,type);
+        const role = 'Buyer'
+        saveUser(user.displayName, user.email,role);
         
       })
       .catch((error) => {
@@ -56,8 +56,8 @@ const Login = () => {
   };
 
   // save user to db
-  const saveUser = (name, email,type) => {
-    const user = { name, email,type };
+  const saveUser = (name, email,role) => {
+    const user = { name, email,role };
     console.log("saveuser", user);  
     fetch(`http://localhost:5000/user/${email}`, {
       method: "PUT",
