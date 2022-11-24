@@ -1,6 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/UserContext';
+import BookNowModal from '../../Pages/Bikes/BookNowModal';
 
-const BikeCard = ({ bike }) => {
+const BikeCard = ({ bike,setBikedetails }) => {
+
+    const {user} = useContext(AuthContext)
+
+
     const {
         model,
         image,
@@ -51,8 +60,23 @@ const BikeCard = ({ bike }) => {
                         {bikedetails}
                     </p>
                 </div>
-                <button className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</button>
-
+                <div className='mt-5'>
+               
+                    {
+                        user?.uid ?
+                            <>
+                                <label
+                             
+                                    onClick={()=>setBikedetails(bike)}
+                                    htmlFor="bookNowModal" className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</label>
+                            </>
+                            :
+                            <>
+                                Please <Link to='/login' className='underline'> Login</Link> to book this bike.
+                            </>
+                    }
+                    
+            </div>
                 {
                     status === 'available' ?
                         <>
@@ -70,6 +94,7 @@ const BikeCard = ({ bike }) => {
 
 
             </div>
+          
         </div>
     );
 };

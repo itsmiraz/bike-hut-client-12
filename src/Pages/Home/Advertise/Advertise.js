@@ -20,7 +20,12 @@ const Advertise = () => {
 
 
     return (
-        <div className='my-20 py-10 bg-gray-200'>
+        <div>
+            {
+                advertisedBikes.length === 0 ? <></>
+                    :
+                    <>
+                      <div className='my-20 py-10 bg-gray-200'>
             <h1 className='text-xl font-semibold text-center'>Advertise Bikes {advertisedBikes?.length}</h1>
             <div className='px-20 justify-items-center grid-cols-2 grid '>
                 {
@@ -32,6 +37,9 @@ const Advertise = () => {
                 }
             </div>
         </div>
+                    </>
+            }
+      </div>
     );
 };
 
