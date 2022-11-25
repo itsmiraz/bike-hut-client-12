@@ -1,35 +1,38 @@
 import React from 'react';
 
-const MyOrdersCard = ({ bike, handleCancelBook }) => {
+const MybuyersCard = ({ buyer,i }) => {
+
     const {
 
-        _id,
-        buyerEmail,
-        img,
+        buyerName,
+        buyerNumber,
+        meetLocation,
+        sellerEmail,
         bikeModel,
         bikePrice,
         bikeId,
-        meetLocation,
-        buyerNumber,
-
-    } = bike
-
-
-
-
+    }
+        = buyer;
 
     return (
         <div>
+            <div className='flex rounded-lg px-4 bg-gray-200  py-4 shadow-lg  w-[700px] mx-auto relative my-4 border items-center font-semibold gap-5'>
 
-
-            <div className='flex rounded-lg p-2  relative my-4 border items-center font-semibold gap-5'>
-                <img className='w-32' src={img} alt="" />
+                <p>
+                   {i+1}.
+                </p>
                 <div>
-                    <h1 className='text-xl'>
-                        {bikeModel.slice(0, 15)}
-                    </h1>
-                    <div>
+                    <h1>Buyer Name : {buyerName}</h1>
+                    <p>
+                        Number : {buyerNumber}
+                    </p>
+                </div>
+                <div>
 
+                    <div>
+                        <p>
+                            Model : {bikeModel}
+                        </p>
                         <p>
                             Price:{bikePrice}
                         </p>
@@ -42,12 +45,10 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                     <p>
                         Location: {meetLocation}
                     </p>
-                    <p>
-                        Number : {buyerNumber}
-                    </p>
+
 
                 </div>
-                <div className='absolute right-20'>
+                {/* <div className='absolute right-20'>
                     <button className='bg-teal-500 text-white font-semibold py-1 px-4 rounded-lg'>Pay</button>
                 </div>
                 <div className='absolute right-2'>
@@ -66,11 +67,10 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                                 className='text-red-500'>Cancel Book</button></li>
                         </ul>
                     </div>
-                </div>
+                </div> */}
             </div>
-
         </div>
     );
 };
 
-export default MyOrdersCard;
+export default MybuyersCard;

@@ -10,12 +10,10 @@ export const AuthContext = createContext()
 const UserContext = ({ children }) => {
     const [user, setuser] = useState(null)
     const auth = getAuth(app)
-    const [roomDetails, setRoomDetails] = useState('')
     const [loading, setLoading] = useState(true)
 
 
     const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
 
     const signUp = (email, password) => {
         setLoading(true)
@@ -66,7 +64,6 @@ const UserContext = ({ children }) => {
     const authInfo = {
         user,
         signUp,
-
         updateUser,
         loading,
         setuserProfile,
@@ -74,8 +71,6 @@ const UserContext = ({ children }) => {
         googleSginIn,
         signIn,
         auth,
-        setRoomDetails,
-        roomDetails
     }
     return (
         <AuthContext.Provider value={authInfo}>
