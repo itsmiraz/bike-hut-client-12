@@ -15,7 +15,7 @@ const UserPage = () => {
         }
     })
     if (isLoading) {
-    return LoadingAnimation
+    return <LoadingAnimation></LoadingAnimation>
 }
     
     return (
