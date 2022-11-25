@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
 import EditProductDetails from './EditProductDetails';
@@ -74,7 +75,12 @@ const MyProducts = () => {
 
     return (
         <div className='h-screen'>
-            <h1 className='text-xl font-semibold'>My Bikes {bikes.length}</h1>
+            <h1 className='text-xl font-semibold'>You have {bikes.length} {bikes.length === 0 ? 'Product' : 'Products'}</h1>
+            {
+                bikes.length === 0 && <>
+                <p className='font-semibold text-xs my-4 text-center'>Wand To <Link to='/dashboard/addaproduct' className='underline'>add a Product</Link></p>
+                </>
+            }
             <div>
                 {/* BIKEs Card  */}
                 {

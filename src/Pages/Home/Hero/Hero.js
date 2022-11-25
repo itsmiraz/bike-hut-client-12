@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
-        <div>
-            <div>
-                <div className="hero my-10">
+        <section className='mb-10'>
+            
+                <div className="hero my-20 ">
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <img alt='' src="https://i.ibb.co/cXtQYSH/pngfind-com-png-for-picsart-hd-1109055.png" className=" w-[50%] rounded-lg " />
                         <div className='w-[50%]'>
@@ -19,8 +19,8 @@ const Hero = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            
+        </section>
     );
 };
 

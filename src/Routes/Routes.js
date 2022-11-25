@@ -1,6 +1,7 @@
 
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 import Bikes from "../Pages/Bikes/Bikes";
+import Blogs from "../Pages/Blogs/Blogs";
 import AddAproduct from "../Pages/Dashboard/AddAproduct/AddAproduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/blogs',
+                element:<Blogs></Blogs>
             },
             {
                 path: '/bikes/:id',

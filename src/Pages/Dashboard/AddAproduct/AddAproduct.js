@@ -19,7 +19,7 @@ const AddAproduct = () => {
 
     const handleAddaProduct = (data) => {
         console.log(data.brand);
-            const image = data.image[0];
+     const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
@@ -103,6 +103,7 @@ const AddAproduct = () => {
                             {...register('image', { required: true })}
                             type="file" className="file-input w-full max-w-xs" />
                         {errors.image && <span className='mx-2'>This field is required</span>}
+                        <p className='text-sm my-1'>Please Upload 1:1 aspect Ratio Image</p>
                     </div>
                     <div>
                         <label className="label">
