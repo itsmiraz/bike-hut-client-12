@@ -7,8 +7,9 @@ import BookNowModal from './BookNowModal';
 const Bikes = () => {
     const data = useLoaderData()
     const {user} = useContext(AuthContext)
-    const [bikedetails,setBikedetails] = useState(null)
-        console.log(data);
+    const [bikedetails, setBikedetails] = useState(null)
+    
+    
     return (
         <div className='px-20 my-10'>
             <h1 className='text-center my-10 font-semibold text-xl'>We have total {data.length > 0 ? <>{ data.length} Results on this Catagory </> : <>0 Result in this Catagory</> }</h1>

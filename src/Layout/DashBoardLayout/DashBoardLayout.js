@@ -5,11 +5,14 @@ import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
 import { AuthContext } from '../../Context/UserContext';
 import useAdmin from '../../Hooks/useAdmin/useAdmin';
+import useSeller from '../../Hooks/useSeller/useSeller';
 
 const DashBoardLayout = () => {
     const { user } = useContext(AuthContext)
     const [isAdmin] = useAdmin(user?.email)
-
+    console.log('admin',isAdmin);
+    const [isSeller] = useSeller(user?.email)
+    console.log('seller',isSeller)
     return (
         <div>
             <Header></Header>
@@ -31,12 +34,21 @@ const DashBoardLayout = () => {
                     <ul className="menu font-semibold   p-4 w-80  text-base-content">
                         {/* Buyer */}
                         <li><Link to='/dashboard/userpage'>Profile</Link></li>
-                        <li><Link to='/dashboard/myorders'>My orders</Link></li>
+
+                        {
+                            !isSeller && !isAdmin &&
+                            <li><Link to='/dashboard/myorders'>My orders</Link></li>
+                       }
 
                         {/* Seller */}
-                        <li><Link to='/dashboard/addaproduct'>Add A product</Link></li>
-                        <li><Link to='/dashboard/myproducts'> My Products</Link></li>
-                        <li><Link to='/dashboard/mybuyers'> My buyers</Link></li>
+                        {
+                            isSeller &&
+                            <>
+                                <li><Link to='/dashboard/addaproduct'>Add A product</Link></li>
+                                <li><Link to='/dashboard/myproducts'> My Products</Link></li>
+                                <li><Link to='/dashboard/mybuyers'> My buyers</Link></li>
+                            </>
+                        }
 
                         {/* admin */}
                         {

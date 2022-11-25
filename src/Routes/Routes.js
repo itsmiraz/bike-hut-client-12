@@ -88,7 +88,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/reporteditems',
-                element:<PrivateRoute><AdminRoute></AdminRoute></PrivateRoute>
+                element:<PrivateRoute><AdminRoute><ReportedItems></ReportedItems></AdminRoute></PrivateRoute>
             },
             
             {
