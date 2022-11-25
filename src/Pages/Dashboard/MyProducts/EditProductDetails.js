@@ -1,82 +1,10 @@
-import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { AuthContext } from '../../../Context/UserContext';
-import {  format } from 'date-fns'
-import { useNavigate } from 'react-router-dom';
-const AddAproduct = () => {
+
+const EditProductDetails = ({bikedetails,setbikedetails}) => {
+
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const imgHostKey = process.env.REACT_APP_imgbbKey
-    const { user } = useContext(AuthContext)
-    const navigate = useNavigate()
-
-    const data = new Date()
-    const date = format(data, 'PP')
-    // console.log(date);
-
-    const handleAddaProduct = (data) => {
-        console.log(data.brand);
-            const image = data.image[0];
-        const formData = new FormData();
-        formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
-        fetch(url, {
-            method: 'POST',
-            body: formData,
-        })
-            .then(res => res.json())
-            .then(imgData => {
-
-                if (imgData.success) {
-
-                    const bikedetails = {
-                        model: data.model,
-                        image: imgData.data.url,
-                        catagoryId : data.brand,
-                        condition: data.condition,
-                        totalDriven: data.totalDriven,
-                        orginalPrice: data.orginalPrice,
-                        resalePrice: data.resalePrice,
-                        sellerNumber: data.sellerNumber,
-                        sellerLocation: data.sellerLocation,
-                        sellerEmail: user?.email,
-                        bikedetails: data.details,
-                        postdate: date,
-                        status:'available',
-                        sellerName: user?.displayName,
-                        purchaseDate : data.purchaseDate,
-                    }
-
-                    console.log(bikedetails)
-                    fetch('https://bike-hut-server.vercel.app/addbikes', {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(bikedetails)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.acknowledged) {
-                                console.log(data);
-                                toast.success('Product Added SuccessFully')
-                                navigate('/dashboard/myproducts')
-                            }
-
-                        })
-
-
-
-                }
-
-
-            })
-
-    }
-
 
 
     const { data: brands = [], } = useQuery({
@@ -88,13 +16,17 @@ const AddAproduct = () => {
         }
     })
 
-
+    const handleEditDetails = data => {
+        setbikedetails(null)
+    }
 
     return (
-        <div className='h-screen w-full'>
-            <h1 className='text-center text-xl font-semibold'>Add A Product</h1>
-            <div className='w-[500px] mx-auto my-10'>
-                <form onSubmit={handleSubmit(handleAddaProduct)}>
+        <div>
+              <input type="checkbox" id="editdetailsModal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box relative">
+                    <label htmlFor="editdetailsModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <form onSubmit={handleSubmit(handleEditDetails)}>
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Image</span>
@@ -226,9 +158,10 @@ const AddAproduct = () => {
 
                     <input value='Post' className='btn w-full my-2' type="submit" />
                 </form>
+                </div>
             </div>
         </div>
     );
 };
 
-export default AddAproduct;
+export default EditProductDetails;

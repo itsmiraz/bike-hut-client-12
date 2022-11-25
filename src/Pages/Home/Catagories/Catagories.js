@@ -27,7 +27,7 @@ const Catagories = () => {
                 {
                     catagorires.map((catagory,i) =>
                         <div key={i}>
-                            <Link to={`/products/${catagory.name}`}>
+                            <Link to={`/bikes/${catagory.catatgory_id}`}>
                             <img src={ catagory.img} className='w-40  p-2' alt="" />
                             </Link>
 

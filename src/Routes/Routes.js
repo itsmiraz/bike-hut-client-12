@@ -35,8 +35,8 @@ export const router = createBrowserRouter([
                 element: <Register></Register>
             },
             {
-                path: '/products/:catagory',
-                loader: ({ params }) => fetch(`https://bike-hut-server.vercel.app/bikes/${params.catagory}`),
+                path: '/bikes/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/bikes/${params.id}`),
                 element:<Bikes></Bikes>
             }
         ]

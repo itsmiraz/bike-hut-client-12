@@ -24,21 +24,24 @@ const BikeCard = ({ bike,setBikedetails }) => {
         bikedetails,
         sellerName,
         status,
+        purchaseDate 
+        
 
     } = bike;
     return (
         <div>
-            <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-[450px]'>
+            <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-[500px]'>
                 <p>Seller : {sellerName}</p>
                 <img src={image} className='w-96' alt="" />
 
                 <h1 className='text-2xl font-semibold'>{model}</h1>
-                <div className='grid shadow-lg bg-gray-200 my-4 p-2 rounded-lg grid-cols-2 gap-3'>
+                <div className='grid shadow-lg bg-gray-200 my-4 p-2 rounded-lg grid-cols-2 gap-2'>
                     <div className=''>
                         <h1>Brand : {brand}</h1>
                         <p>Conditon : {condition}</p>
                         <p>New Price : {orginalPrice}</p>
                         <p>Resale Price : {resalePrice}</p>
+                        <p>Purchase Date : {  purchaseDate }</p>
 
 
 

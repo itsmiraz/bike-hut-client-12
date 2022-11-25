@@ -1,15 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import EditProductDetails from './EditProductDetails';
 import MyBikesCard from './MyBikesCard';
 
 const MyProducts = () => {
 
     const { user } = useContext(AuthContext)
+    const [bikedetails, setbikedetails] = useState(null)
     
+
+
     const {data:bikes,isLoading ,refetch} = useQuery({
         queryKey: ['bikes', user?.email],
         queryFn: async () => {
@@ -23,6 +28,8 @@ const MyProducts = () => {
     if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
     }
+
+  
 
 
     const handleDelete = (id) => {
@@ -69,7 +76,7 @@ const MyProducts = () => {
         <div className='h-screen'>
             <h1 className='text-xl font-semibold'>My Bikes {bikes.length}</h1>
             <div>
-
+                {/* BIKEs Card  */}
                 {
                     bikes.map(bike => <MyBikesCard
                         key={bike._id}
@@ -77,10 +84,21 @@ const MyProducts = () => {
                         handleDelete={handleDelete}
                         handleSold={handleSold}
                         handleAdvertise={handleAdvertise}
+                        setbikedetails={setbikedetails}
                     ></MyBikesCard>)
                 }
 
 
+            </div>
+            <div>
+                {/* Edit Bike Details Modal */}
+                {
+                    bikedetails && 
+                    <EditProductDetails
+                            setbikedetails={setbikedetails}
+                            bikedetails={bikedetails}
+                        ></EditProductDetails>
+                }
             </div>
         </div>
     );

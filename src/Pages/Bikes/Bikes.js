@@ -8,10 +8,10 @@ const Bikes = () => {
     const data = useLoaderData()
     const {user} = useContext(AuthContext)
     const [bikedetails,setBikedetails] = useState(null)
-    
+        console.log(data);
     return (
         <div className='px-20 my-10'>
-            <h1 className='text-center my-10 font-semibold text-xl'>We have {data?.length} {data.length>0 ? `${data?.length > 0 ? 'Bikes': 'Bike'} on ${data[0]?.brand} brand`: 'Results' }</h1>
+            <h1 className='text-center my-10 font-semibold text-xl'>We have total {data.length > 0 ? <>{ data.length} Results on this Catagory </> : <>0 Result in this Catagory</> }</h1>
             <div className='grid grid-cols-2 justify-items-center gap-10'>
                 {
                     data?.map(bike => <BikeCard

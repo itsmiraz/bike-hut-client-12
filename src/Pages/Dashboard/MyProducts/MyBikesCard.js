@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise }) => {
+const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikedetails }) => {
     console.log(bike);
 
     const {
@@ -23,7 +23,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise }) => {
 
     return (
         <div>
-            <div className='flex rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex shadow-lg  rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
                 <img className='w-32' src={image} alt="" />
                 <div>
                     <h1 className='text-xl'>
@@ -87,6 +87,12 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise }) => {
                                     <button onClick={() => handleAdvertise(_id)}>
                                         Advertise
                                     </button>
+                                </li>
+                                <li>
+                                  
+                                        <label
+                                            onClick={()=>setbikedetails(bike)}
+                                            htmlFor="editdetailsModal">Edit</label>
                                 </li>
                             </>}
 
