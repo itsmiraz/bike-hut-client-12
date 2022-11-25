@@ -1,15 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
-const EditProductDetails = ({ biked, setbikedetails }) => {
-    
+const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
+
     const imgHostKey = process.env.REACT_APP_imgbbKey
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const {
 
-
+        _id,
         model,
         image,
         catagoryId,
@@ -36,24 +37,23 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
     })
 
     const handleEditDetails = data => {
-        setbikedetails(null)
-        const image = data.image[0];
-        const formData = new FormData();
-        formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
-        fetch(url, {
-            method: 'POST',
-            body: formData,
-        })
-            .then(res => res.json())
-            .then(imgData => {
+        // const image = data.image[0];
+        // const formData = new FormData();
+        // formData.append('image', image);
+        // const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: formData,
+        // })
+        //     .then(res => res.json())
+        //     .then(imgData => {
 
-                if (imgData.success) {
+        //         if (imgData.success) {
 
                     const editBikeDetails = {
                         model: data.model,
-                        image: imgData.data.url,
-                        catagoryId : data.brand,
+                       
+                        catagoryId: data.brand,
                         condition: data.condition,
                         totalDriven: data.totalDriven,
                         orginalPrice: data.orginalPrice,
@@ -61,14 +61,29 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
                         sellerNumber: data.sellerNumber,
                         sellerLocation: data.sellerLocation,
                         bikedetails: data.details,
-                        status:data.status,
-                        purchaseDate : data.purchaseDate,
+                        status: data.status,
+                        purchaseDate: data.purchaseDate,
                     }
                     console.log(editBikeDetails)
+                    fetch(`http://localhost:5000/editbikedetails/${_id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
 
-           }
-            })
+                        },
+                        body: JSON.stringify(editBikeDetails)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.modifiedCount > 0) {
+                                refetch()
+                                setbikedetails(null)
+                                toast.success('Successfully Edited')
+                            }
+                          
+                        })
 
+            
     }
 
 
@@ -80,20 +95,11 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
                     <label htmlFor="editdetailsModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handleSubmit(handleEditDetails)}>
                         <div className='flex items-center' >
-                            <img src={image } className='w-40' alt="" />
-                       
-                            <div>
-                            <label className="label">
-                                <span className="label-text font-semibold">Update Image</span>
-                            </label>
-                            <input
-                                    {...register('image')}
-                                   
-                                type="file" className="file-input w-full max-w-xs" />
-                                
-                           </div>
-                       
-                       
+                            <img src={image} className='w-40' alt="" />
+
+                          
+
+
                         </div>
                         <div>
                             <label className="label">
@@ -107,10 +113,11 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
 
                         <div>
                             <label className="label">
-                                <span className="label-text font-semibold">Brand</span>
+                                <span className="label-text font-semibold">Brand *</span>
                             </label>
                             <select {...register('brand', { required: true })} className="select select-bordered w-full ">
-                                <option defaultValue={catagoryId} >Select Brand</option>
+                           
+                                <option disabled>Select Brand</option>
                                 {
                                     brands.map((brand, i) => <option
                                         key={i}
@@ -132,7 +139,7 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
                             </label>
                             <select  {...register('condition', { required: true })} className="select select-bordered w-full ">
                                 <option>New</option>
-                                <option defaultValue={condition} disabled>{ condition}</option>
+                                <option defaultValue={condition} disabled>{condition}</option>
                                 <option>Fresh</option>
                                 <option>Used</option>
 
@@ -146,8 +153,8 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
                                 <span className="label-text font-semibold">Status</span>
                             </label>
                             <select  {...register('status', { required: true })} className="select select-bordered w-full ">
-                              
-                                <option defaultValue={status} disabled>{ status}</option>
+
+                                <option defaultValue={status} disabled>{status}</option>
                                 <option>available</option>
                                 <option>sold</option>
 
@@ -180,7 +187,7 @@ const EditProductDetails = ({ biked, setbikedetails }) => {
                             <label className="label">
                                 <span className="label-text font-semibold">Details</span>
                             </label>
-                              
+
                             <textarea defaultValue={bikedetails} type='text'
                                 {...register('details', { required: true })}
                                 className='input input-bordered h-32 w-full my-2' placeholder="Details" />

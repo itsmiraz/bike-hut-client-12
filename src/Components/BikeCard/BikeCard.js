@@ -1,9 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
-import BookNowModal from '../../Pages/Bikes/BookNowModal';
 
 const BikeCard = ({ bike,setBikedetails }) => {
 
@@ -28,6 +26,7 @@ const BikeCard = ({ bike,setBikedetails }) => {
         
 
     } = bike;
+    console.log(  purchaseDate  )
     return (
         <div>
             <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-[500px]'>

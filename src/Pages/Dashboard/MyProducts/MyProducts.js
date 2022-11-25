@@ -97,6 +97,7 @@ const MyProducts = () => {
                     <EditProductDetails
                             setbikedetails={setbikedetails}
                             biked={bikedetails}
+                            refetch={refetch}
                         ></EditProductDetails>
                 }
             </div>
