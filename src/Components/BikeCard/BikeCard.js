@@ -46,7 +46,7 @@ const BikeCard = ({ bike,setBikedetails }) => {
 
     return (
         <div>
-            <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-[500px]'>
+            <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-full md:w-[500px]'>
                 <p className='flex gap-2'>Seller : {sellerName}
                 
                 {

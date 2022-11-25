@@ -30,7 +30,7 @@ const Advertise = () => {
                     <>
                         <div className='my-20   bg-gray-200'>
                             <h1 className='text-xl font-semibold py-10 text-center'>Advertise Bikes </h1>
-                            <div className='px-20 pb-10 gap-10 justify-items-center grid-cols-2 grid '>
+                            <div className='px-4 md:px-20 pb-10 gap-10 justify-items-center grid-cols-1 md:grid-cols-2 grid '>
                                 {
                                     advertisedBikes.map(bike => <BikeCard
                                         key={bike._id}

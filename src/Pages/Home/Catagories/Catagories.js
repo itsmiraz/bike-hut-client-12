@@ -20,15 +20,15 @@ const Catagories = () => {
     }
 
     return (
-        <div className='my-20'>
-            <h1 className='text-center text-xl font-semibold'>Catagories </h1>
+        <div className='my-2 md:my-20'>
+            <h1 className='text-center text-3xl font-semibold'>Catagories </h1>
             
-            <div className='flex px-20 items-center justify-around'>
+            <div className='flex flex-col md:flex-row px-20 gap-5 md:gap-0 items-center justify-around'>
                 {
                     catagorires.map((catagory,i) =>
                         <div key={i}>
                             <Link to={`/bikes/${catagory.catatgory_id}`}>
-                            <img src={ catagory.img} className='w-40  p-2' alt="" />
+                            <img src={ catagory.img} className='w-full md:w-40  p-2' alt="" />
                             </Link>
 
                     </div>)
