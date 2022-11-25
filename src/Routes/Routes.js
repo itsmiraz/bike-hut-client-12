@@ -15,6 +15,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../Layout/Main/Main");
@@ -55,25 +56,25 @@ export const router = createBrowserRouter([
         // normal User Route
             {
                 path: '/dashboard/myorders',
-                element:<MyOrders></MyOrders>
+                element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
             },
             
             {
                 path: '/dashboard/userpage',
-                element:<UserPage></UserPage>
+                element:<PrivateRoute><UserPage></UserPage></PrivateRoute>
             },
             // seller Routes
             {
                 path: '/dashboard/addaproduct',
-                element:<AddAproduct></AddAproduct>
+                element:<PrivateRoute><SellerRoute><AddAproduct></AddAproduct></SellerRoute></PrivateRoute>
             },
             {
                 path: '/dashboard/myproducts',
-                element:<MyProducts></MyProducts>
+                element:<PrivateRoute><SellerRoute><MyProducts></MyProducts></SellerRoute></PrivateRoute>
             },
             {
                 path: '/dashboard/mybuyers',
-                element:<Mybuyers></Mybuyers>
+                element:<PrivateRoute><SellerRoute><Mybuyers></Mybuyers></SellerRoute></PrivateRoute>
             },
 
             // Admin Route
