@@ -8,14 +8,15 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
   const data = useLoaderData();
-
+    console.log(data)
   return (
-    <div className="p-5 my-10 h-screen ">
+    <div className="p-5 mx-4 bg-white rounded-lg shadow-lg my-10 ">
       <h1 className="text-xl font-semibold">
-        {/* Payment For {data.treatmentName} */}
+              Confirm Payment for { data.bikeModel
+}
       </h1>
       <p className="text-semibold">
-        Please Pay <strong>{data.price}</strong>
+        Please Pay <strong>{data.bikePrice}</strong> tk
       </p>
       <div className="my-4">
         <Elements stripe={stripePromise}>

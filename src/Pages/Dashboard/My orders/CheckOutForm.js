@@ -17,7 +17,7 @@ const CheckOutForm = ({ booking }) => {
   const [proccessing, setProccessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
 
-  const { price ,Patientname ,Patientemail ,_id } = booking;
+  const { bikePrice,buyerName ,buyerEmail,_id } = booking;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -25,11 +25,11 @@ const CheckOutForm = ({ booking }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ price }),
+      body: JSON.stringify({ bikePrice }),
     })
       .then(res => res.json())
       .then(data => setClientSecret(data.clientSecret));
-  }, [price]);
+  }, [bikePrice]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -60,8 +60,8 @@ const CheckOutForm = ({ booking }) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: Patientname,
-            email: Patientemail,
+            name: buyerName,
+            email: buyerEmail,
           },
         },
       },
@@ -77,9 +77,9 @@ const CheckOutForm = ({ booking }) => {
      toast.success('Payment Success')
      navigate('/dashboard')
      const payment = {
-       email: Patientemail,
+       email: buyerEmail,
        transactionID: paymentIntent.id,
-       price,
+       bikePrice,
        bookingID : _id
 
      }
@@ -101,7 +101,7 @@ const CheckOutForm = ({ booking }) => {
   };
 
   return (
-    <div>
+    <div className="w-70  mx-auto  ">
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
@@ -121,7 +121,7 @@ const CheckOutForm = ({ booking }) => {
         />
         <p className="text-red-500">{cardError}</p>
         <button
-          className="btn btn-sm my-4"
+          className="bg-teal-500 text-white py-1 rounded font-semibold px-4 my-4"
           type="submit"
           disabled={!stripe || !clientSecret}
         >

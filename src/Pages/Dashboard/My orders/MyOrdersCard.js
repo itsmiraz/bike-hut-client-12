@@ -49,7 +49,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
 
                 </div>
                 <div className='absolute right-20'>
-                <Link to={`/payment/${_id}`}>
+                <Link to={`/dashboard/payment/${_id}`}>
 
 
                     <button className='bg-teal-500 text-white font-semibold py-1 px-4 rounded-lg'>Pay</button>
