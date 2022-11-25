@@ -7,6 +7,7 @@ import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
 import Alluser from "../Pages/Dashboard/Allusers/Alluser";
 import MyOrders from "../Pages/Dashboard/My orders/MyOrders";
+import Payment from "../Pages/Dashboard/My orders/Payment";
 import Mybuyers from "../Pages/Dashboard/Mybuyers/Mybuyers";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
@@ -100,10 +101,17 @@ export const router = createBrowserRouter([
                 path: '/dashboard/allusers',
                 element: <PrivateRoute><AdminRoute><Alluser></Alluser></AdminRoute></PrivateRoute>
             },
+           
+            {
+                path: "/dashboard/payment/:id",
+                loader: ({ params }) =>
+                  fetch(`http://localhost:5000/bookings/${params.id}`),
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
+            },
             {
                 path: "*",
                 element:<ErrorPage></ErrorPage>
-            }
+            },
         ]
     }
 ])
