@@ -13,6 +13,7 @@ import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
 import UserPage from "../Pages/Dashboard/UserPage/UserPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -51,10 +52,17 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
         children: [
+        // normal User Route
             {
                 path: '/dashboard/myorders',
                 element:<MyOrders></MyOrders>
             },
+            
+            {
+                path: '/dashboard/userpage',
+                element:<UserPage></UserPage>
+            },
+            // seller Routes
             {
                 path: '/dashboard/addaproduct',
                 element:<AddAproduct></AddAproduct>
@@ -67,25 +75,24 @@ export const router = createBrowserRouter([
                 path: '/dashboard/mybuyers',
                 element:<Mybuyers></Mybuyers>
             },
+
+            // Admin Route
             {
                 path: '/dashboard/allsellers',
-                element:<AllSellers></AllSellers>
+                element:<PrivateRoute><AdminRoute><AllSellers></AllSellers></AdminRoute></PrivateRoute>
             },
             {   
                 path: '/dashboard/allbuyers',
-                element:<AllBuyers></AllBuyers>
+                element:<PrivateRoute><AdminRoute><AllBuyers></AllBuyers></AdminRoute></PrivateRoute>
             },
             {
                 path: '/dashboard/reporteditems',
-                element:<ReportedItems></ReportedItems>
+                element:<PrivateRoute><AdminRoute></AdminRoute></PrivateRoute>
             },
-            {
-                path: '/dashboard/userpage',
-                element:<UserPage></UserPage>
-            },
+            
             {
                 path: '/dashboard/allusers',
-                element: <Alluser></Alluser>
+                element: <PrivateRoute><AdminRoute><Alluser></Alluser></AdminRoute></PrivateRoute>
             }
         ]
     }
