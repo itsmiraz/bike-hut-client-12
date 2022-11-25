@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikedetails }) => {
-    console.log(bike);
+   
 
     const {
         _id,
@@ -88,14 +88,14 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikede
                                         Advertise
                                     </button>
                                 </li>
-                                <li>
-                                  
-                                        <label
-                                            onClick={()=>setbikedetails(bike)}
-                                            htmlFor="editdetailsModal">Edit</label>
-                                </li>
+                               
                             </>}
-
+                            <li>
+                                  
+                                  <label
+                                      onClick={()=>setbikedetails(bike)}
+                                      htmlFor="editdetailsModal">Edit</label>
+                          </li>
                             <li><button onClick={() => handleDelete(_id)} className='text-red-500'>Delete</button></li>
                         </ul>
                     </div>

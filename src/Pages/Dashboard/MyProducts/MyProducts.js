@@ -96,7 +96,7 @@ const MyProducts = () => {
                     bikedetails && 
                     <EditProductDetails
                             setbikedetails={setbikedetails}
-                            bikedetails={bikedetails}
+                            biked={bikedetails}
                         ></EditProductDetails>
                 }
             </div>
