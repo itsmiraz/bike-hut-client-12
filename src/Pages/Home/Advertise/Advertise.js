@@ -33,7 +33,7 @@ const Advertise = () => {
                             <div className='px-20 pb-10 gap-10 justify-items-center grid-cols-2 grid '>
                                 {
                                     advertisedBikes.map(bike => <BikeCard
-                                        key={bike.id}
+                                        key={bike._id}
                                         bike={bike}
                                         setBikedetails={setBikedetails}
                                     ></BikeCard>)

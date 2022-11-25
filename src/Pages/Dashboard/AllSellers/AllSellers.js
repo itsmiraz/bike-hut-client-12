@@ -1,40 +1,81 @@
+import { async } from '@firebase/util';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 
 const AllSellers = () => {
 
 
-    const [sellers, setsellers] = useState([])
-    useEffect(() => {
-        fetch('https://bike-hut-server.vercel.app/user')
+    // const [sellers, setsellers] = useState([])
+    // useEffect(() => {
+    //     fetch('https://bike-hut-server.vercel.app/user')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             const users = data.filter(user => user.role === 'Seller')
+    //             setsellers(users)
+    //         })
+
+
+    // }, [])
+
+    const { data: sellers, isLoading,refetch } = useQuery({
+        queryKey: ['sellers'],
+        queryFn: async () => {
+            const res = await fetch('https://bike-hut-server.vercel.app/user')
+            const data = await res.json()
+            const users = data.filter(user => user.role === 'Seller')
+            return users
+        }
+
+    })
+
+    if (isLoading) {
+        return <LoadingAnimation></LoadingAnimation>
+    }
+
+    const handleVerifySeller = (email) => {
+
+        fetch(`http://localhost:5000/verifyseller?email=${email}`, {
+            method: 'PUT'
+        })
             .then(res => res.json())
             .then(data => {
-                const users = data.filter(user => user.role === 'Seller')
-                setsellers(users)
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    
+                    toast.success('SellerVerified')
+                    refetch()
+                }
             })
-
-
-    }, [])
-
-    const handleMakeAdmin = (id) => {
 
     }
 
     return (
         <div className='h-screen  w-full'>
             <div>
-            <h1 className='text-xl my-10 font-semibold text-center'>All Sellers</h1>
+                <h1 className='text-xl my-10 font-semibold text-center'>All Sellers</h1>
             </div>
             <div>
                 {
                     sellers.map((user, i) =>
                         <div key={user._id}>
                             <div className='flex  relative py-4 items-center mx-auto rounded-lg  gap-5 px-8 bg-white my-3 text-slate-800 font-semibold w-full md:w-[500px]'>
-                                <p>{i + 1}</p>
+                                <p>{i + 1}.</p>
                                 <div className='flex md:flex-row gap-2 flex-col'>
                                     <p>{user.name}</p>
                                     <p>{user.email}</p>
+                                    {
+                                        user.verifySeller &&
+                                        <p className='bg-blue-500 rounded-full text-white'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                            </svg>
+
+                                        </p>
+                                    }
                                 </div>
                                 <div className="dropdown absolute right-4 dropdown-end">
                                     <label tabIndex={0} className=" m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -47,7 +88,11 @@ const AllSellers = () => {
                                                 user.role === 'admin' ? 'Admin' : 'Make Admin'
                                             }
                                         </button></li> */}
-                                        <li><button className=''>Verify Seller</button></li>
+                                        {
+                                            !user?.verifySeller &&
+                                            <li><button onClick={() => handleVerifySeller(user.email)} className=''>Verify Seller</button></li>
+                                        }
+                                        <li><button>Delete</button></li>
                                     </ul>
                                 </div>
                             </div>

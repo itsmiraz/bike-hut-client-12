@@ -7,10 +7,8 @@ const MybuyersCard = ({ buyer,i }) => {
         buyerName,
         buyerNumber,
         meetLocation,
-        sellerEmail,
         bikeModel,
         bikePrice,
-        bikeId,
     }
         = buyer;
 
