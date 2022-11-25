@@ -2,12 +2,12 @@ import React from 'react';
 
 const Blogs = () => {
     return (
-        <div className='h-screen'>
+        <div className='h-full md:h-screen'>
             <h1 className='text-center font-semibold text-xl my-10'>Blogs</h1>
             <div className='px-4 md:px-32 '>
 
-                <div className='grid  gap-4 grid-cols-2'>
-                    <details>
+                <div className='grid  gap-10 grid-cols-1  md:grid-cols-2'>
+                    <details className=' p-4 rounded-lg '>
                         <summary className="py-2 select-none font-semibold outline-none text-xl cursor-pointer"> What are the different ways to manage a state in a React application?</summary>
                         <div className="px-4 pb-4">
                             <p>There are four main types of state you need to properly manage in your React apps:
@@ -29,7 +29,7 @@ const Blogs = () => {
                             </p>
                         </div>
                     </details>
-                    <details>
+                    <details className=' p-4 rounded-lg '>
                         <summary className="py-2 select-none font-semibold outline-none text-xl cursor-pointer">How does prototypical inheritance work?</summary>
                         <div className="px-4 pb-4">
                             <p>
@@ -38,7 +38,7 @@ const Blogs = () => {
 
                         </div>
                     </details>
-                    <details>
+                    <details className=' p-4 rounded-lg '>
                         <summary className="py-2 select-none font-semibold outline-none text-xl cursor-pointer">What is a unit test? Why should we write unit tests?</summary>
                         <div className="px-4 pb-4">
                             <p>
@@ -53,7 +53,7 @@ const Blogs = () => {
 
                         </div>
                     </details>
-                    <details>
+                    <details className=' p-4 rounded-lg '>
                         <summary className="py-2 select-none font-semibold outline-none text-xl cursor-pointer">React vs. Angular vs. Vue?</summary>
                         <div className="px-4 pb-4">
                             <p>
@@ -66,7 +66,7 @@ const Blogs = () => {
                     </details>
 
                 </div>
-
+        
             </div>
 
         </div>
