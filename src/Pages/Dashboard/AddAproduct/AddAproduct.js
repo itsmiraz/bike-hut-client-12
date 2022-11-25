@@ -91,9 +91,9 @@ const AddAproduct = () => {
 
 
     return (
-        <div className='h-screen w-full'>
-            <h1 className='text-center text-xl font-semibold'>Add A Product</h1>
-            <div className='w-[500px] mx-auto my-10'>
+        <div className='h-screen py-10 w-full'>
+            <h1 className='text-center text-xl my-4 font-semibold'>Add A Product</h1>
+            <div className='w-[500px] rounded-lg bg-white p-5 mx-auto '>
                 <form onSubmit={handleSubmit(handleAddaProduct)}>
                     <div>
                         <label className="label">
@@ -142,9 +142,9 @@ const AddAproduct = () => {
                         </label>
                         <select {...register('condition', { required: true })} className="select select-bordered w-full ">
                             <option value='Select Condition' disabled>Select Condition</option>
-                            <option>New</option>
-                            <option>Fresh</option>
-                            <option>Used</option>
+                            <option>Excellent</option>
+                            <option>Good</option>
+                            <option>Fair</option>
 
                         </select>
                         {errors.condition && <span className='mx-2'>This field is required</span>}
@@ -163,11 +163,11 @@ const AddAproduct = () => {
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text font-semibold">Purchase Date</span>
+                            <span className="label-text font-semibold">Purchase Year</span>
                         </label>
                         <input type='text'
                             {...register('purchaseDate', { required: true })}
-                            className='input input-bordered w-full my-2' placeholder="dd/mm/yy" />
+                            className='input input-bordered w-full my-2' placeholder="YY" />
                         {errors.purchaseDate && <span className='mx-2'>This field is required</span>}
 
                     </div>
@@ -228,6 +228,7 @@ const AddAproduct = () => {
                     <input value='Post' className='btn w-full my-2' type="submit" />
                 </form>
             </div>
+        
         </div>
     );
 };

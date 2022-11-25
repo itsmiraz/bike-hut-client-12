@@ -16,9 +16,9 @@ const DashBoardLayout = () => {
     return (
         <div>
             <Header></Header>
-            <div className="drawer   drawer-mobile">
+            <div className="drawer z-10  drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content relative flex flex-col items-center justify-center">
+                <div className="drawer-content bg-gray-200 relative flex flex-col items-center justify-center">
                     <Outlet></Outlet>
                     <label htmlFor="my-drawer-2" className=" bg-teal-500 rounded-full text-white p-2   absolute top-5 left-5 drawer-button lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -31,7 +31,7 @@ const DashBoardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu font-semibold   p-4 w-80  text-base-content">
+                    <ul className="menu font-semibold z-10  md:bg-transparent bg-gray-300  p-4 w-80  text-base-content">
                         {/* Buyer */}
                         <li><Link to='/dashboard/userpage'>Profile</Link></li>
 

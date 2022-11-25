@@ -19,9 +19,9 @@ const UserPage = () => {
 }
     
     return (
-        <div className='w-full h-screen'>
+        <div className=' h-full md:h-screen'>
 
-            <div className='my-10'>
+            <div className='my-10 bg-white p-10 rounded-lg shadow-lg'>
             <img className='w-40 mx-auto' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU' alt="" />
                 <h1 className='text-xl font-semibold text-center my-2'>{user?.displayName}</h1>  
                 <h1 className='text-center font-semibold my-2'>{user?.email}</h1>

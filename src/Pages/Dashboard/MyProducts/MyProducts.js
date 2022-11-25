@@ -75,7 +75,7 @@ const MyProducts = () => {
 
     return (
         <div className='h-screen'>
-            <h1 className='text-xl font-semibold'>You have {bikes.length} {bikes.length === 0 ? 'Product' : 'Products'}</h1>
+            <h1 className='text-xl text-center my-10 font-semibold'>You have {bikes.length} {bikes.length === 0 ? 'Product' : 'Products'}</h1>
             {
                 bikes.length === 0 && <>
                 <p className='font-semibold text-xs my-4 text-center'>Wand To <Link to='/dashboard/addaproduct' className='underline'>add a Product</Link></p>

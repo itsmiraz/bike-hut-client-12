@@ -24,7 +24,7 @@ const Header = () => {
     }
 
     return (
-        <div className='bg-white  text-slate-900 items-center md:px-10 px-4 py-3 flex justify-between w-full'>
+        <div className='bg-white z-70 text-slate-900 items-center md:px-10 px-4 py-3 flex justify-between w-full'>
 
             <img className='w-40 z-50' src={logo} alt="" />
 

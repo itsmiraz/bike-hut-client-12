@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
 import MyOrdersCard from './MyOrdersCard';
@@ -43,7 +44,20 @@ const MyOrders = () => {
  
     return (
         <div className='h-screen w-full'>
-                <h1 className='text-xl font-semibold text-center my-10 '>My Orders</h1>
+            {
+                bookedBikes.length === 0 ?
+                    <>
+                        <p className='text-center font-semibold my-52'>
+
+                    You haven't booked any think yet <Link className='underline' to='/'>Book Now</Link>
+
+                        </p>
+                    </>
+                    :
+                    <>
+                       <h1 className='text-xl font-semibold text-center my-10 '>My Orders</h1>
+                    </>
+             }
             <div className='px-40'>
                 {
 

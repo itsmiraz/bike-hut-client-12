@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikedetails }) => {
-   
+const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbikedetails }) => {
+
 
     const {
         _id,
@@ -23,7 +24,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikede
 
     return (
         <div>
-            <div className='flex shadow-lg  rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex shadow-lg bg-white rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
                 <img className='w-32' src={image} alt="" />
                 <div>
                     <h1 className='text-xl'>
@@ -84,18 +85,32 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise,setbikede
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={() => handleAdvertise(_id)}>
-                                        Advertise
-                                    </button>
+                                    {
+                                        bike.advertise ?
+                                            <>
+                                                <p className='py-0'>
+                                                    Product is Live on
+                                                    </p>
+                                                    <Link to='/' className='underline'>Advertise Seciton</Link>
+                                         
+                                            </>
+                                            :
+                                            <>
+                                                <button onClick={() => handleAdvertise(_id)}>
+                                                    Advertise
+                                                </button>
+                                            </>
+                                    }
+
                                 </li>
-                               
+
                             </>}
                             <li>
-                                  
-                                  <label
-                                      onClick={()=>setbikedetails(bike)}
-                                      htmlFor="editdetailsModal">Edit</label>
-                          </li>
+
+                                <label
+                                    onClick={() => setbikedetails(bike)}
+                                    htmlFor="editdetailsModal">Edit</label>
+                            </li>
                             <li><button onClick={() => handleDelete(_id)} className='text-red-500'>Delete</button></li>
                         </ul>
                     </div>

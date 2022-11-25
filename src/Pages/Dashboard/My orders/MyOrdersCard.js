@@ -22,7 +22,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
         <div>
 
 
-            <div className='flex rounded-lg p-2  relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex rounded-lg p-2 bg-white shadow-lg relative my-4 border items-center font-semibold gap-5'>
                 <img className='w-32' src={img} alt="" />
                 <div>
                     <h1 className='text-xl'>

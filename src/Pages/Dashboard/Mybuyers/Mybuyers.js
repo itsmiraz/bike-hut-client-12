@@ -25,8 +25,20 @@ const Mybuyers = () => {
 
 
     return (
-        <div className='h-screen w-full'>
-            <h1 className='text-center text-xl font-semibold my-10'>My Buyers  : {buyers.length}</h1>
+        <div className=''>
+            {
+                
+                buyers.length === 0 ? 
+                    <>
+                        <p className='text-center mb-52 text-xl font-semibold'>
+                            You haven't any buyer yet.  
+                        </p>
+                    </>
+                    :
+                    <>
+                     <h1 className='text-center text-xl font-semibold my-10'>You Have total : {buyers.length} buyers</h1>
+                    </>
+           }
             <div className='px-10'>
                 {
 

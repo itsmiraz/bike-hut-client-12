@@ -53,7 +53,7 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
                     const editBikeDetails = {
                         model: data.model,
                        
-                        catagoryId: data.brand,
+                      
                         condition: data.condition,
                         totalDriven: data.totalDriven,
                         orginalPrice: data.orginalPrice,
@@ -111,28 +111,7 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
                             {errors.model && <span className='mx-2'>This field is required</span>}
                         </div>
 
-                        <div>
-                            <label className="label">
-                                <span className="label-text font-semibold">Brand *</span>
-                            </label>
-                            <select {...register('brand', { required: true })} className="select select-bordered w-full ">
-                           
-                                <option disabled>Select Brand</option>
-                                {
-                                    brands.map((brand, i) => <option
-                                        key={i}
-                                        value={brand.catatgory_id}
-                                    >
-                                        {brand.name}
-                                    </option>)
-                                }
-
-
-                            </select>
-                            {errors.brand && <span className='mx-2'>This field is required</span>}
-
-
-                        </div>
+                     
                         <div>
                             <label className="label">
                                 <span className="label-text font-semibold">Condition</span>
@@ -175,7 +154,7 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
                         </div>
                         <div>
                             <label className="label">
-                                <span className="label-text font-semibold">Purchase Date</span>
+                                <span className="label-text font-semibold">Purchase Year</span>
                             </label>
                             <input defaultValue={purchaseDate} type='text'
                                 {...register('purchaseDate', { required: true })}

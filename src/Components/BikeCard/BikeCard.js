@@ -3,11 +3,12 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import useSeller from '../../Hooks/useSeller/useSeller';
 
 const BikeCard = ({ bike,setBikedetails }) => {
 
     const {user} = useContext(AuthContext)
-
+    const[isSeller] = useSeller(user?.email)
 
     const {
         model,
@@ -70,7 +71,7 @@ const BikeCard = ({ bike,setBikedetails }) => {
                         <p>Conditon : {condition}</p>
                         <p>New Price : {orginalPrice}</p>
                         <p>Resale Price : {resalePrice}</p>
-                        <p>Purchase Date : {  purchaseDate }</p>
+                        <p>Purchase Year : {  purchaseDate }</p>
 
 
 
@@ -97,10 +98,19 @@ const BikeCard = ({ bike,setBikedetails }) => {
                     {
                         user?.uid ?
                             <>
-                                <label
+                                {
+                                    isSeller ?
+                                        <>
+                                        You Have be an Buyer To book this item.
+                                        </>
+                                        :
+                                        <>
+                                         <label
                              
-                                    onClick={()=>setBikedetails(bike)}
-                                    htmlFor="bookNowModal" className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</label>
+                             onClick={()=>setBikedetails(bike)}
+                             htmlFor="bookNowModal" className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</label>
+                                        </>
+                               }
                             </>
                             :
                             <>

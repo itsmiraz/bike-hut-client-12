@@ -11,6 +11,7 @@ import Mybuyers from "../Pages/Dashboard/Mybuyers/Mybuyers";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
 import UserPage from "../Pages/Dashboard/UserPage/UserPage";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute/AdminRoute";
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
                 path: '/bikes/:id',
                 loader: ({ params }) => fetch(`http://localhost:5000/bikes/${params.id}`),
                 element:<Bikes></Bikes>
+            },
+            {
+                path: '*',
+                element:<ErrorPage></ErrorPage>
             }
         ]
     },
@@ -94,6 +99,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <PrivateRoute><AdminRoute><Alluser></Alluser></AdminRoute></PrivateRoute>
+            },
+            {
+                path: "*",
+                element:<ErrorPage></ErrorPage>
             }
         ]
     }
