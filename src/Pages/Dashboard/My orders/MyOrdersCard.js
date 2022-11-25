@@ -7,6 +7,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
         _id,
         buyerEmail,
         img,
+        paid,
         bikeModel,
         bikePrice,
         bikeId,
@@ -49,11 +50,18 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
 
                 </div>
                 <div className='absolute right-20'>
-                <Link to={`/dashboard/payment/${_id}`}>
-
-
-                    <button className='bg-teal-500 text-white font-semibold py-1 px-4 rounded-lg'>Pay</button>
-                    </Link>
+                    {
+                        paid === 'true' ?
+                            <>
+                                <p>Paid</p>
+                            </>
+                            :
+                            <>
+                                <Link to={`/dashboard/payment/${_id}`}>
+                                    <button className='bg-teal-500 text-white font-semibold py-1 px-4 rounded-lg'>Pay</button>
+                                </Link>
+                            </>
+                    }
                 </div>
                 <div className='absolute right-2'>
                     <div className="dropdown dropdown-end">

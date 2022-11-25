@@ -17,7 +17,7 @@ const CheckOutForm = ({ booking }) => {
   const [proccessing, setProccessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
 
-  const { bikePrice,buyerName ,buyerEmail,_id } = booking;
+  const { bikePrice,buyerName ,buyerEmail,bikeId  } = booking;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -75,12 +75,13 @@ const CheckOutForm = ({ booking }) => {
      setTransactionID(paymentIntent.id)
      setProccessing(false)
      toast.success('Payment Success')
-     navigate('/dashboard')
-     const payment = {
+     navigate('/dashboard/myorders')
+     const paymentDetails = {
        email: buyerEmail,
        transactionID: paymentIntent.id,
        bikePrice,
-       bookingID : _id
+       bookingID : bikeId,
+
 
      }
 
@@ -89,11 +90,13 @@ const CheckOutForm = ({ booking }) => {
        headers: {
          'content-type': "application/json",
        },
-       body:JSON.stringify(payment)
+       body:JSON.stringify(paymentDetails)
      })
        .then(res => res.json())
        .then(data => {
-       console.log(data);
+           console.log(data);
+          
+
      })
 
    }
