@@ -15,7 +15,7 @@ const Advertise = () => {
         fetch('https://bike-hut-server.vercel.app/allbikecollection')
             .then(res => res.json())
             .then(data => {
-                const adBikes = data.filter(bike => bike.advertise === 'true');
+                const adBikes = data.filter(bike => bike.advertise === 'true' && bike.paid !== 'true');
                 setAdvertiseBike(adBikes)
             })
 

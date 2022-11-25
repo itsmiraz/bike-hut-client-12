@@ -25,7 +25,7 @@ const Mybuyers = () => {
 
 
     return (
-        <div className=''>
+        <div className='h-screen'>
             {
                 
                 buyers.length === 0 ? 
@@ -36,7 +36,7 @@ const Mybuyers = () => {
                     </>
                     :
                     <>
-                     <h1 className='text-center text-xl font-semibold my-10'>You Have total : {buyers.length} buyers</h1>
+                        <h1 className='text-center text-xl font-semibold my-10'>You Have total {buyers.length} { buyers.length > 1 ? 'buyers': 'buyer'}</h1>
                     </>
            }
             <div className='px-10'>
