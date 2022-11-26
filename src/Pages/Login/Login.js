@@ -75,7 +75,7 @@ const Login = () => {
           setTimeout(() => {
             navigate(from, { replace: true })
 
-        }, 300);
+        }, 1000);
        
           
         

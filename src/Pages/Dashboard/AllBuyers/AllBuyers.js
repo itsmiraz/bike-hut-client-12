@@ -17,7 +17,7 @@ const AllBuyers = () => {
   
 
     const {data:buyers,isLoading,refetch } = useQuery({
-        queryKey: ['buyers'],
+        queryKey: ['buyers',user?.email],
         queryFn: async () => {
             try {
                 const { data } = await request.get(`/user?email=${user?.email}`)
@@ -61,7 +61,7 @@ const AllBuyers = () => {
     }
 
     return (
-        <div className='h-screen  w-full'>
+        <div className='h-screen px-4 w-full'>
             <div>
                 <h1 className='text-xl my-10 font-semibold text-center'>All Buyers</h1>
             </div>
@@ -77,11 +77,11 @@ const AllBuyers = () => {
                             {
                                 buyers.map((user, i) =>
                                     <div key={user._id}>
-                                        <div className='flex  relative py-4 items-center mx-auto rounded-lg  gap-5 px-8 bg-white my-3 text-slate-800 font-semibold w-full md:w-[500px]'>
+                                        <div className='flex flex-row relative py-4 items-center mx-auto rounded-lg  gap-5  bg-white my-3 text-slate-800 font-semibold px-2 w-full md:w-[500px]'>
                                             <p>{i + 1}</p>
-                                            <div className='flex md:flex-row gap-2 flex-col'>
+                                            <div className='flex items-center md:flex-row gap-2 flex-col'>
                                                 <p>{user.name}</p>
-                                                <p>{user.email}</p>
+                                                <p className='text-sm'>{user.email}</p>
                                             </div>
                                             <div className="dropdown absolute right-4 dropdown-end">
                                                 <label tabIndex={0} className=" m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

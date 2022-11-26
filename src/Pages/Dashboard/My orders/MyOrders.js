@@ -10,14 +10,24 @@ import MyOrdersCard from './MyOrdersCard';
 
 const MyOrders = () => {
 
-    const {user} = useContext(AuthContext)
+    const {user,logOut} = useContext(AuthContext)
 
     const { data:bookedBikes,isLoading ,refetch} = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://bike-hut-server.vercel.app/booked?email=${user?.email}`)
-            const data = await res.json()
-            return data
+            const res = await fetch(`http://localhost:5000/booked?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+                }
+            })
+            if (res.status === 401 || res.status === 403) {
+                return logOut()
+            }
+            else {
+                const data = await res.json()
+                return data
+                
+            }
         }
         
     })

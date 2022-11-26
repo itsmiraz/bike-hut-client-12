@@ -111,7 +111,7 @@ const Regiseter = () => {
                                 <span className="label-text font-semibold">Password</span>
                             </label>
                             <input type='password'
-                                {...register('password', { required: 'Password is Required', minLength: { value: 6, message: "Password Must be 6 characters" }, pattern: { value: /[a-z]+$/i, message: 'More Stornger' } })}
+                                {...register('password', { required: 'Password is Required', minLength: { value: 6, message: "Password Must be 6 characters" }, pattern: { value: /[a-z]+$/, message: 'More Stornger' } })}
                                 className='input input-bordered w-full my-2' placeholder="Password" />
 
 
