@@ -24,7 +24,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbiked
 
     return (
         <div>
-            <div className='flex shadow-lg bg-white rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex select-none shadow-lg bg-white rounded-lg p-2 w-[700px] relative my-4 border items-center font-semibold gap-5'>
                 <img className='w-32' src={image} alt="" />
                 <div>
                     <h1 className='text-xl'>
@@ -86,7 +86,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbiked
                                 </li>
                                 <li>
                                     {
-                                        bike.advertise ?
+                                        bike.advertise === 'true' ?
                                             <>
                                                 <p className='py-0'>
                                                     Product is Live on

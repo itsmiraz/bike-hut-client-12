@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
-import request from '../../../http-common';
 
 const AllSellers = () => {
 
@@ -25,10 +24,11 @@ const AllSellers = () => {
                     return logOut()
                 }
                 else {
-                    const data = res.json()
+                    const data = await res.json()
+                    console.log(data)
                     const users = data.filter(user => user.role === 'Seller')
                     return users
-              }
+                 }
                 
             
            
@@ -43,7 +43,10 @@ const AllSellers = () => {
     const handleVerifySeller = (email) => {
 
         fetch(`http://localhost:5000/verifyseller?email=${email}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorization : `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {

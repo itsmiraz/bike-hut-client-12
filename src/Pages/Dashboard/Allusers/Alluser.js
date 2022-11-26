@@ -68,8 +68,6 @@ const Alluser = () => {
 
 
         request.delete(`/user/${id}`)
-           
-
             .then(data => {
                 console.log(data);
                 // if (data.deletedCount > 0) {

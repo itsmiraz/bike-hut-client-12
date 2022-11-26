@@ -13,7 +13,7 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
         _id,
         model,
         image,
-        catagoryId,
+      
         condition,
         totalDriven,
         orginalPrice,
@@ -30,7 +30,12 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
     const { data: brands = [], } = useQuery({
         queryKey: ['brand'],
         queryFn: async () => {
-            const res = await fetch('https://bike-hut-server.vercel.app/catagories')
+            const res = await fetch('http://localhost:5000/catagories', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+                }
+            })
             const data = await res.json()
             return data;
         }

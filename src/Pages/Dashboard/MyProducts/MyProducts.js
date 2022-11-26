@@ -19,7 +19,12 @@ const MyProducts = () => {
     const {data:bikes,isLoading ,refetch} = useQuery({
         queryKey: ['bikes', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://bike-hut-server.vercel.app/allbikes?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/allbikes?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+                }
+            })
             const data = await res.json()
             return data
         }
@@ -34,8 +39,12 @@ const MyProducts = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`https://bike-hut-server.vercel.app/bike/${id}`, {
+        fetch(`http://localhost:5000/bike/${id}`, {
             method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -49,8 +58,12 @@ const MyProducts = () => {
 
 
     const handleSold = (id) => {
-        fetch(`https://bike-hut-server.vercel.app/bike/${id}`, {
-            method:'PUT'
+        fetch(`http://localhost:5000/bike/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -61,8 +74,12 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = (id) => {
-        fetch(`https://bike-hut-server.vercel.app/advertiseBike/${id}`, {
-            method:'PUT'
+        fetch(`http://localhost:5000/advertiseBike/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+            }
         })
             .then(res => res.json())
             .then(data => {
