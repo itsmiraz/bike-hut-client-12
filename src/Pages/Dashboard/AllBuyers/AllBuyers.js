@@ -8,6 +8,7 @@ import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimat
 
 const AllBuyers = () => {
 
+    
 
     // const [buyers, setbuyerss] = useState([])
     // useEffect(() => {

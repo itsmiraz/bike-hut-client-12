@@ -2,16 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
+import request from '../../../http-common';
+
+
 
 const Alluser = () => {
 
     const { data: users, isLoading,refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('https://bike-hut-server.vercel.app/user')
-            const data = await res.json()
-            
-            return data
+            const data = await request.get(`/user`)
+            return data.data
         }
 
     })
@@ -38,16 +39,17 @@ const Alluser = () => {
     const handledelete = (id) => {
 
 
-        fetch(`http://localhost:5000/user/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
+        request.delete(`/user/${id}`)
+        // fetch(`http://localhost:5000/user/${id}`, {
+        //     method: "DELETE"
+        // })
+          
             .then(data => {
                 console.log(data);
-                if (data.deletedCount > 0) {
+                // if (data.deletedCount > 0) {
                     toast.success('Buyer Deleted')
                     refetch()
-                }
+                // }
                 
             })
     }
