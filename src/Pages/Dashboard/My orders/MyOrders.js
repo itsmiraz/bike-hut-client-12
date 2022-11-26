@@ -35,19 +35,7 @@ const MyOrders = () => {
                 
             }
 
-            // const res = await fetch(`https://bike-hut-server.vercel.app`, {
-            //     headers: {
-            //         authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
-            //     }
-            // })
-            // if (res.status === 401 || res.status === 403) {
-            //     return logOut()
-            // }
-            // else {
-            //     const data = await res.json()
-            //     return data
-                
-            // }
+          
         }
         
     })
@@ -88,7 +76,7 @@ const MyOrders = () => {
                        <h1 className='text-xl font-semibold text-center my-10 '>My Orders</h1>
                     </>
              }
-            <div className='px-40'>
+            <div className='px-4 md:px-40'>
                 {
 
                     bookedBikes.map(bike => <MyOrdersCard

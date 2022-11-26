@@ -22,9 +22,9 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
         <div>
 
 
-            <div className='flex rounded-lg p-2 bg-white shadow-lg relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex flex-col md:flex-row rounded-lg p-2 bg-white shadow-lg relative my-4 border items-center font-semibold gap-5'>
                 <img className='w-32' src={img} alt="" />
-                <div>
+                <div className='flex flex-col text-center md:text-start'>
                     <h1 className='text-xl'>
                         {bikeModel.slice(0, 15)}
                     </h1>
@@ -36,7 +36,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                     </div>
                 </div>
 
-                <div>
+                <div  className='flex flex-col text-center md:text-start'>
 
 
                     <p>
@@ -47,7 +47,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                     </p>
 
                 </div>
-                <div className='absolute right-20'>
+                <div className='px-10'>
                     {
                         paid === 'true' ?
                             <>
