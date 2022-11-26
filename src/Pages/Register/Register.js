@@ -73,8 +73,8 @@ const Regiseter = () => {
 
     return (
         <div>
-            <div className='flex justify-center h-[600px] items-center'>
-                <div className='w-96'>
+            <div className='flex px-4 justify-center h-[600px] items-center'>
+                <div className='w-full md:w-96'>
                     <h1 className='text-xl text-center font-bold my-10'>Sign Up</h1>
                     <form onSubmit={handleSubmit(handleSignup)}>
                         <div>

@@ -59,7 +59,7 @@ const Login = () => {
   const saveUser = (name, email,role) => {
     const user = { name, email,role };
     console.log("saveuser", user);  
-    fetch(`https://bike-hut-server.vercel.app/user/${email}`, {
+    fetch(`http://localhost:5000/user/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -70,20 +70,20 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, );
-        if (data.status === 'success') {
+       
           localStorage.setItem('bikehutAccessToken', data.data)
           setTimeout(() => {
             navigate(from, { replace: true })
 
         }, 300);
-       }
+       
           
         
       });
   };
 
   return (
-    <div className="flex mb-10 justify-center h-[600px] items-center">
+    <div className="flex mb-10 px-4 justify-center h-[600px] items-center">
       <div className="w-96">
         <h1 className="text-xl text-center font-bold my-4">Login</h1>
         <form onSubmit={handleSubmit(handleLogin)}>

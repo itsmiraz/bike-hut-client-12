@@ -34,7 +34,23 @@ const Alluser = () => {
                 })
 
     }
- 
+
+    const handledelete = (id) => {
+
+
+        fetch(`http://localhost:5000/user/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success('Buyer Deleted')
+                    refetch()
+                }
+                
+            })
+    }
 
     return (
         <div className='h-screen w-full'>
@@ -72,7 +88,7 @@ const Alluser = () => {
                                             }
                                         </button></li>
                                         
-                                        <li><button>Delete</button></li>
+                                        <li><button onClick={()=>handledelete(user._id)}>Delete</button></li>
                                     </ul>
                                 </div>
                             </div>

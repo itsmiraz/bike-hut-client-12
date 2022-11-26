@@ -47,7 +47,8 @@ const AddAproduct = () => {
                         postdate: date,
                         status:'available',
                         sellerName: user?.displayName,
-                        purchaseDate : data.purchaseDate,
+                        purchaseDate: data.purchaseDate,
+                        paid:'false'
                     }
 
                     console.log(bikedetails)
