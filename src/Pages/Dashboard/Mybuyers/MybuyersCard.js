@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MybuyersCard = ({ buyer,i }) => {
+const MybuyersCard = ({ buyer, i }) => {
 
     const {
 
@@ -14,16 +14,19 @@ const MybuyersCard = ({ buyer,i }) => {
 
     return (
         <div>
-            <div className='flex rounded-lg px-4 bg-gray-200  py-4 shadow-lg  w-[700px] mx-auto relative my-4 border items-center font-semibold gap-5'>
+            <div className='flex flex-col md:flex-row rounded-lg px-4 bg-gray-200  py-4 shadow-lg  w-full md:w-[700px] mx-auto relative my-4 border items-center font-semibold gap-5'>
 
-                <p>
-                   {i+1}.
-                </p>
-                <div>
-                    <h1>Buyer Name : {buyerName}</h1>
+
+                <div className='flex'>
                     <p>
-                        Number : {buyerNumber}
+                        {i + 1}.
                     </p>
+                    <div>
+                        <h1>Buyer Name : {buyerName}</h1>
+                        <p>
+                            Number : {buyerNumber}
+                        </p>
+                    </div>
                 </div>
                 <div>
 

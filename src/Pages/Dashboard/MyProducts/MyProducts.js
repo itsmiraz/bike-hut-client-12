@@ -91,14 +91,14 @@ const MyProducts = () => {
 
 
     return (
-        <div className='h-screen'>
+        <div className='h-screen w-full'>
             <h1 className='text-xl text-center my-10 font-semibold'>You have {bikes.length} {bikes.length === 0 ? 'Product' : 'Products'}</h1>
             {
                 bikes.length === 0 && <>
                 <p className='font-semibold text-xs my-4 text-center'>Wand To <Link to='/dashboard/addaproduct' className='underline'>add a Product</Link></p>
                 </>
             }
-            <div>
+            <div className='px-4'>
                 {/* BIKEs Card  */}
                 {
                     bikes.map(bike => <MyBikesCard

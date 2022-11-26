@@ -16,9 +16,9 @@ const Bikes = () => {
         setAvailableBikse(notPaidBikes)
     },[data])
     return (
-        <div className='px-20 my-10'>
+        <div className='px-4 md:px-20 my-10'>
             <h1 className='text-center my-10 font-semibold text-xl'>We have total {data.length > 0 ? <>{ data.length} Results on this Catagory </> : <>0 Result in this Catagory</> }</h1>
-            <div className='grid grid-cols-2 justify-items-center gap-10'>
+            <div className='grid grid-cols-1 md:grid-cols-2 justify-items-center gap-10'>
                 {
                     availableBikes?.map(bike => <BikeCard
                         key={bike._id}

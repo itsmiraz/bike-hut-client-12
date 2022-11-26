@@ -82,7 +82,7 @@ const Alluser = () => {
         <div className='h-screen w-full'>
             <h1 className='text-center text-xl font-semibold'>All Users</h1>
 
-            <div>
+            <div className='px-4'>
 
                 {
                     users.map((user, i) =>
