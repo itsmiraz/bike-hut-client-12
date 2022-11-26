@@ -16,6 +16,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
         // normal User Route
             {
                 path: '/dashboard/myorders',
-                element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>
+                element:<PrivateRoute><BuyerRoute><MyOrders></MyOrders></BuyerRoute></PrivateRoute>
             },
             
             {

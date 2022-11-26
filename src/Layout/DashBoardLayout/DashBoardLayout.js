@@ -5,6 +5,7 @@ import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
 import { AuthContext } from '../../Context/UserContext';
 import useAdmin from '../../Hooks/useAdmin/useAdmin';
+import useBuyer from '../../Hooks/useBuyer/userBuyer';
 import useSeller from '../../Hooks/useSeller/useSeller';
 
 const DashBoardLayout = () => {
@@ -12,7 +13,8 @@ const DashBoardLayout = () => {
     const [isAdmin] = useAdmin(user?.email)
     console.log('admin',isAdmin);
     const [isSeller] = useSeller(user?.email)
-    console.log('seller',isSeller)
+    console.log('seller', isSeller)
+    const[isBuyer] = useBuyer(user?.email)
     return (
         <div>
             <Header></Header>
@@ -36,7 +38,7 @@ const DashBoardLayout = () => {
                         <li><Link to='/dashboard/userpage'>Profile</Link></li>
 
                         {
-                            !isSeller && !isAdmin &&
+                            isBuyer &&
                             <li><Link to='/dashboard/myorders'>My orders</Link></li>
                        }
 
