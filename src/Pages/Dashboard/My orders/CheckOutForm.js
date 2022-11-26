@@ -11,8 +11,6 @@ const CheckOutForm = ({ booking }) => {
   const navigate = useNavigate()
   const elements = useElements();
 
-  const [transactionID, setTransactionID] = useState("");
-  const [success, setSuccess] = useState("");
   const [cardError, setCardError] = useState("");
   const [proccessing, setProccessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
@@ -52,7 +50,6 @@ const CheckOutForm = ({ booking }) => {
     } else {
       setCardError("");
     }
-    setSuccess('')
     setProccessing(true)
     const {paymentIntent, error : confirmError} = await stripe.confirmCardPayment(
       clientSecret,
@@ -71,8 +68,6 @@ const CheckOutForm = ({ booking }) => {
       setCardError(confirmError.message)
     }
    if(paymentIntent.status === 'succeeded'){
-      setSuccess('Congrats Your Payment is Done')
-     setTransactionID(paymentIntent.id)
      setProccessing(false)
      toast.success('Payment Success')
      navigate('/dashboard/myorders')
@@ -131,12 +126,7 @@ const CheckOutForm = ({ booking }) => {
           Pay
         </button>
       </form>
-      {
-        success && <div>
-          <p className="text-green-500">{success}</p>
-          <p className="">{ transactionID}</p>
-        </div>
-      }
+    
     </div>
   );
 };

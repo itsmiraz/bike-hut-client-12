@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 import useSeller from '../../Hooks/useSeller/useSeller';
 
-const BikeCard = ({ bike,setBikedetails }) => {
+const BikeCard = ({ bike, setBikedetails }) => {
 
-    const {user} = useContext(AuthContext)
-    const[isSeller] = useSeller(user?.email)
+    const { user } = useContext(AuthContext)
+    const [isSeller] = useSeller(user?.email)
 
     const {
+        _id,
         model,
         image,
         brand,
@@ -25,13 +27,14 @@ const BikeCard = ({ bike,setBikedetails }) => {
         sellerName,
         status,
         purchaseDate,
-        sellerEmail
-        
+        sellerEmail,
+        reported
+
 
     } = bike;
-    
 
-    const { data: seller =[],  } = useQuery({
+
+    const { data: seller = [], } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
             const res = await fetch('https://bike-hut-server.vercel.app/user')
@@ -42,14 +45,30 @@ const BikeCard = ({ bike,setBikedetails }) => {
 
     })
 
-    
+
+
+
+    const handleReport = id => {
+        fetch(`http://localhost:5000/reported/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('Reported Success Fully')
+            })
+    }
 
     return (
         <div>
             <div className='font-semibold bg-white rounded-lg shadow-lg border p-4 relative w-full md:w-[500px]'>
                 <p className='flex gap-2'>Seller : {sellerName}
-                
-                {
+
+                    {
                         seller[0]?.verifySeller &&
                         <span className='bg-blue-500 rounded-full text-white'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -58,10 +77,10 @@ const BikeCard = ({ bike,setBikedetails }) => {
 
                         </span>
                     }
-                </p> 
-                   
-                
-               
+                </p>
+
+
+
                 <img src={image} className='w-96' alt="" />
 
                 <h1 className='text-2xl font-semibold'>{model}</h1>
@@ -71,7 +90,7 @@ const BikeCard = ({ bike,setBikedetails }) => {
                         <p>Conditon : {condition}</p>
                         <p>New Price : {orginalPrice}</p>
                         <p>Resale Price : {resalePrice}</p>
-                        <p>Purchase Year : {  purchaseDate }</p>
+                        <p>Purchase Year : {purchaseDate}</p>
 
 
 
@@ -94,31 +113,56 @@ const BikeCard = ({ bike,setBikedetails }) => {
                     </p>
                 </div>
                 <div className='mt-5'>
-               
+
                     {
                         user?.uid ?
                             <>
                                 {
                                     isSeller ?
                                         <>
-                                        You Have be an Buyer To book this item.
+                                            You Have be an Buyer To book this item.
                                         </>
                                         :
-                                        <>
-                                         <label
-                             
-                             onClick={()=>setBikedetails(bike)}
-                             htmlFor="bookNowModal" className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</label>
-                                        </>
-                               }
+                                        <div className='flex justify-between items-center'>
+                                            <div >
+                                                <label
+
+                                                    onClick={() => setBikedetails(bike)}
+                                                    htmlFor="bookNowModal" className='bg-teal-600 mt-4 shadow-lg text-white my-2 rounded-full px-4 py-2'>Book Now</label>
+                                            </div>
+
+                                            <div className="dropdown  dropdown-end">
+                                                <label tabIndex={0} className=" m-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                                </svg>
+                                                </label>
+                                                <ul tabIndex={0} className="dropdown-content menu  shadow bg-gray-200 rounded-box w-52">
+                                                    {
+                                                        reported === 'true' ?
+                                                            <>
+                                                                <li>
+                                                                    <button>Reported</button>
+                                                                </li>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <li><button onClick={() => handleReport(_id)} >
+                                                                    Report
+                                                                </button></li>
+                                                            </>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                }
                             </>
                             :
                             <>
                                 Please <Link to='/login' className='underline'> Login</Link> to book this bike.
                             </>
                     }
-                    
-            </div>
+
+                </div>
                 {
                     status === 'available' ?
                         <>
@@ -136,7 +180,7 @@ const BikeCard = ({ bike,setBikedetails }) => {
 
 
             </div>
-          
+
         </div>
     );
 };

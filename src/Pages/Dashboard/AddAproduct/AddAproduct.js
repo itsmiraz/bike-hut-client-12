@@ -52,7 +52,8 @@ const AddAproduct = () => {
                         status: 'available',
                         sellerName: user?.displayName,
                         purchaseDate: data.purchaseDate,
-                        paid: 'false'
+                        paid: 'false',
+                        reported: 'false'
                     }
 
                     // console.log(bikedetails)

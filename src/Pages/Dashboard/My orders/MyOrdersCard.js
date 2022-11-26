@@ -5,12 +5,10 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
     const {
 
         _id,
-        buyerEmail,
         img,
         paid,
         bikeModel,
         bikePrice,
-        bikeId,
         meetLocation,
         buyerNumber,
 
@@ -63,7 +61,9 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                             </>
                     }
                 </div>
-                <div className='absolute right-2'>
+                {
+                    paid === 'false' &&
+                    <div className='absolute right-2'>
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className=" m-1">
 
@@ -80,6 +80,7 @@ const MyOrdersCard = ({ bike, handleCancelBook }) => {
                         </ul>
                     </div>
                 </div>
+               }
             </div>
 
         </div>

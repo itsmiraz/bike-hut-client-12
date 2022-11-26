@@ -20,7 +20,11 @@ const AllBuyers = () => {
         queryKey: ['buyers',user?.email],
         queryFn: async () => {
             try {
-                const { data } = await request.get(`/user?email=${user?.email}`)
+                const { data } = await request.get(`/user?email=${user?.email}`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`,
+                    }
+                })
                 const users = data.filter(user => user.role === 'Buyer')
                 return users
                

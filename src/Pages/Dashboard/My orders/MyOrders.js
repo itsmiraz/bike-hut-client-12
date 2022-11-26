@@ -31,7 +31,7 @@ const MyOrders = () => {
         }
         
     })
-
+    console.log(bookedBikes);
 
 
     if (isLoading) {
