@@ -1,21 +1,54 @@
+import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
+import { AuthContext } from '../../../Context/UserContext';
 import request from '../../../http-common';
 
 
 
 const Alluser = () => {
-
-    const { data: users, isLoading,refetch } = useQuery({
+    const { user, logOut } = useContext(AuthContext)
+    const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const data = await request.get(`/user`)
-            return data.data
+            try {
+                const { data } = await request.get(`/user?email=${user?.email}`)
+                return data
+            }
+            catch(error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        return logOut()
+                    }
+                } 
+            }
         }
+           
+            // .catch(error => {
+            //     if (error.response) {
+            //         console.log(error.response.status);
+            //         if (error.response.status === 401 || error.response.status === 403) {
+            //             return logOut()
+            //         }
+            //     } 
 
-    })
+            //  })
+
+ })
+          
+               
+              
+                   
+    
+     
+
+        
+    
+              
 
     if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
@@ -24,15 +57,15 @@ const Alluser = () => {
 
     const handleMakeAdmin = id => {
         fetch(`http://localhost:5000/user/admin/${id}`, {
-            method:"PUT"
+            method: "PUT"
         })
             .then(res => res.json())
             .then(data => {
-            console.log(data)
+
 
                 toast.success('SuccessFully Created Admin')
                 refetch()
-                })
+            })
 
     }
 
@@ -40,17 +73,17 @@ const Alluser = () => {
 
 
         request.delete(`/user/${id}`)
-        // fetch(`http://localhost:5000/user/${id}`, {
-        //     method: "DELETE"
-        // })
-          
+            // fetch(`http://localhost:5000/user/${id}`, {
+            //     method: "DELETE"
+            // })
+
             .then(data => {
                 console.log(data);
                 // if (data.deletedCount > 0) {
-                    toast.success('Buyer Deleted')
-                    refetch()
+                toast.success('Buyer Deleted')
+                refetch()
                 // }
-                
+
             })
     }
 
@@ -60,7 +93,7 @@ const Alluser = () => {
 
             <div>
 
-            {
+                {
                     users.map((user, i) =>
                         <div key={user._id}>
                             <div className='flex  relative py-4 items-center mx-auto rounded-lg  gap-5 px-8 bg-white my-3 text-slate-800 font-semibold w-full md:w-[500px]'>
@@ -89,8 +122,8 @@ const Alluser = () => {
                                                 user.role === 'admin' ? 'Admin' : 'Make Admin'
                                             }
                                         </button></li>
-                                        
-                                        <li><button onClick={()=>handledelete(user._id)}>Delete</button></li>
+
+                                        <li><button onClick={() => handledelete(user._id)}>Delete</button></li>
                                     </ul>
                                 </div>
                             </div>

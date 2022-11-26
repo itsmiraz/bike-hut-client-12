@@ -1,34 +1,39 @@
 import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
+import { AuthContext } from '../../../Context/UserContext';
+import request from '../../../http-common';
 
 const AllBuyers = () => {
 
+    const {user,logOut} = useContext(AuthContext)
     
 
-    // const [buyers, setbuyerss] = useState([])
-    // useEffect(() => {
-    //     fetch('https://bike-hut-server.vercel.app/user')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const users = data.filter(user => user.role === 'Buyer')
-    //             setbuyerss(users)
-    //         })
-
-
-    // }, [])
+  
 
     const {data:buyers,isLoading,refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('https://bike-hut-server.vercel.app/user')
-            const data = await res.json()
-            const users = data.filter(user => user.role === 'Buyer')
-            return users
+            try {
+                const { data } = await request.get(`/user?email=${user?.email}`)
+                const users = data.filter(user => user.role === 'Buyer')
+                return users
+               
+            }
+            catch(error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        return logOut()
+                    }
+                } 
+            }
+         
         }
     })
 

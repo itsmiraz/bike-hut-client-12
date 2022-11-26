@@ -69,9 +69,9 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, );
+        // console.log(data);
        
-          localStorage.setItem('bikehutAccessToken', data.data)
+          localStorage.setItem('bikehutAccessToken',data.data)
           setTimeout(() => {
             navigate(from, { replace: true })
 
