@@ -47,7 +47,7 @@ const AllBuyers = () => {
     const handledelete = (id) => {
 
 
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://bike-hut-server.vercel.app/user/${id}`, {
             method:"DELETE"
         })
             .then(res => res.json())

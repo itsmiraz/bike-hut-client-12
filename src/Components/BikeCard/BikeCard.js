@@ -4,13 +4,14 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import useBuyer from '../../Hooks/useBuyer/userBuyer';
 import useSeller from '../../Hooks/useSeller/useSeller';
 
 const BikeCard = ({ bike, setBikedetails }) => {
 
     const { user } = useContext(AuthContext)
     const [isSeller] = useSeller(user?.email)
-
+    const [isBuyer] = useBuyer(user?.email)
     const {
         _id,
         model,
@@ -49,7 +50,7 @@ const BikeCard = ({ bike, setBikedetails }) => {
 
 
     const handleReport = id => {
-        fetch(`http://localhost:5000/reported/${id}`, {
+        fetch(`https://bike-hut-server.vercel.app/reported/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -118,11 +119,8 @@ const BikeCard = ({ bike, setBikedetails }) => {
                         user?.uid ?
                             <>
                                 {
-                                    isSeller ?
-                                        <>
-                                            You Have be an Buyer To book this item.
-                                        </>
-                                        :
+                                    isBuyer ?
+                                       
                                         <div className='flex justify-between items-center'>
                                             <div >
                                                 <label
@@ -154,6 +152,12 @@ const BikeCard = ({ bike, setBikedetails }) => {
                                                 </ul>
                                             </div>
                                         </div>
+                                        :
+                                        
+                                         <>
+                                            You Have be an Buyer To book this item.
+                                        </>
+                                        
                                 }
                             </>
                             :

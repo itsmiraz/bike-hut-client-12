@@ -30,7 +30,7 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
     const { data: brands = [], } = useQuery({
         queryKey: ['brand'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/catagories', {
+            const res = await fetch('https://bike-hut-server.vercel.app/catagories', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
 
@@ -70,10 +70,11 @@ const EditProductDetails = ({ biked, setbikedetails, refetch }) => {
                         purchaseDate: data.purchaseDate,
                     }
                     console.log(editBikeDetails)
-                    fetch(`http://localhost:5000/editbikedetails/${_id}`, {
+                    fetch(`https://bike-hut-server.vercel.app/editbikedetails/${_id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',
+                            authorization:`bearer ${localStorage.getItem('bikehutAccessToken')}`
 
                         },
                         body: JSON.stringify(editBikeDetails)

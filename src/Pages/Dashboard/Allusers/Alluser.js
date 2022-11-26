@@ -14,7 +14,7 @@ const Alluser = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['sellers',user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/user?email=${user?.email}`, {
+            const res = await fetch(`https://bike-hut-server.vercel.app/user?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
                 }
@@ -45,7 +45,7 @@ const Alluser = () => {
 
 
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:5000/user/admin/${id}?email=${user?.email}`, {
+        fetch(`https://bike-hut-server.vercel.app/user/admin/${id}?email=${user?.email}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`

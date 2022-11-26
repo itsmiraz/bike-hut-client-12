@@ -28,7 +28,7 @@ const ReportedItems = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/bike/${id}`, {
+        fetch(`https://bike-hut-server.vercel.app/bike/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`

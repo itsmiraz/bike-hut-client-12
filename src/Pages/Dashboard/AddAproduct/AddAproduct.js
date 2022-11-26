@@ -58,7 +58,7 @@ const AddAproduct = () => {
 
                     // console.log(bikedetails)
 
-                    fetch('http://localhost:5000/addbikes', {
+                    fetch('https://bike-hut-server.vercel.app/addbikes', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

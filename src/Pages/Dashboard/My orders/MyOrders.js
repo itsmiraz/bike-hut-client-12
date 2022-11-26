@@ -6,28 +6,48 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import request from '../../../http-common';
 import MyOrdersCard from './MyOrdersCard';
 
 const MyOrders = () => {
 
     const {user,logOut} = useContext(AuthContext)
-
+    // /booked?email=${user?.email}
     const { data:bookedBikes,isLoading ,refetch} = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booked?email=${user?.email}`, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
-                }
-            })
-            if (res.status === 401 || res.status === 403) {
-                return logOut()
-            }
-            else {
-                const data = await res.json()
+
+
+            try {
+                const { data } = await request.get(`/booked?email=${user?.email}`, {
+                    headers: {
+                                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+                            }
+                })
                 return data
+            }
+            catch (error) {
+                if (error.response) {
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        return logOut()
+                    }
+                }
                 
             }
+
+            // const res = await fetch(`https://bike-hut-server.vercel.app`, {
+            //     headers: {
+            //         authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            //     }
+            // })
+            // if (res.status === 401 || res.status === 403) {
+            //     return logOut()
+            // }
+            // else {
+            //     const data = await res.json()
+            //     return data
+                
+            // }
         }
         
     })
@@ -40,7 +60,7 @@ const MyOrders = () => {
 
 
     const handleCancelBook = id => {
-        fetch(`http://localhost:5000/book/${id}`, {
+        fetch(`https://bike-hut-server.vercel.app/book/${id}`, {
             method:'DELETE'
             
         })

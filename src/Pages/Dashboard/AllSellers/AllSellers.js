@@ -49,7 +49,7 @@ const AllSellers = () => {
 
     const handleVerifySeller = (email) => {
 
-        fetch(`http://localhost:5000/verifyseller?email=${email}`, {
+        fetch(`https://bike-hut-server.vercel.app/verifyseller?email=${email}`, {
             method: 'PUT',
             headers: {
                 authorization : `bearer ${localStorage.getItem('bikehutAccessToken')}`

@@ -59,7 +59,7 @@ const Login = () => {
   const saveUser = (name, email,role) => {
     const user = { name, email,role };
     console.log("saveuser", user);  
-    fetch(`http://localhost:5000/user/${email}`, {
+    fetch(`https://bike-hut-server.vercel.app/user/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

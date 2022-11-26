@@ -12,7 +12,7 @@ const Mybuyers = () => {
     const { data: buyers, isLoading } = useQuery({
         queryKey: ['buyers', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/buyers?email=${user?.email}`)
+            const res = await fetch(`https://bike-hut-server.vercel.app/buyers?email=${user?.email}`)
             const data = await res.json()
             return data
         }
@@ -30,7 +30,7 @@ const Mybuyers = () => {
                 
                 buyers.length === 0 ? 
                     <>
-                        <p className='text-center mb-52 text-xl font-semibold'>
+                        <p className='text-center my-10 mb-52 text-xl font-semibold'>
                             You haven't any buyer yet.  
                         </p>
                     </>
