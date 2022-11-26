@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import request from '../../../http-common';
 
 const AllSellers = () => {
 
@@ -14,21 +15,27 @@ const AllSellers = () => {
         queryKey: ['sellers',user?.email],
         queryFn: async () => {
           
-            const res = await fetch(`http://localhost:5000/user?email=${user?.email}`, {
-                headers: {
-                        authorization : `bearer ${localStorage.getItem('bikehutAccessToken')}`
+
+            try {
+                const { data } = await request.get(`/user?email=${user?.email}`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`,
                     }
                 })
-              
-                if (res.status === 401 || res.status === 403) {
-                    return logOut()
-                }
-                else {
-                    const data = await res.json()
-                    console.log(data)
-                    const users = data.filter(user => user.role === 'Seller')
-                    return users
-                 }
+                const users = data.filter(user => user.role === 'Seller')
+                return users
+               
+            }
+            catch(error) {
+                if (error.response) {
+                    console.log(error.response.status);
+                    if (error.response.status === 401 || error.response.status === 403) {
+                        return logOut()
+                    }
+                } 
+            }
+
+           
                 
             
            
