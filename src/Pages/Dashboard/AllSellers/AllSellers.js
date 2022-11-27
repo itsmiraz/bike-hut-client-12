@@ -66,6 +66,31 @@ const AllSellers = () => {
             })
 
     }
+    
+
+    const handledelete = (id) => {
+
+
+        fetch(`https://bike-hut-server.vercel.app/user/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success('Seller Deleted')
+                    refetch()  
+                }
+                
+        })
+
+
+
+    }
+
 
     return (
         <div className='h-screen px-4 w-full'>
@@ -100,16 +125,12 @@ const AllSellers = () => {
                                     </svg>
                                     </label>
                                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-gray-100 rounded-box w-52">
-                                        {/* <li><button onClick={() => handleMakeAdmin(user._id)} className='text-white'>
-                                            {
-                                                user.role === 'admin' ? 'Admin' : 'Make Admin'
-                                            }
-                                        </button></li> */}
+                                      
                                         {
                                             !user?.verifySeller &&
                                             <li><button onClick={() => handleVerifySeller(user.email)} className=''>Verify Seller</button></li>
                                         }
-                                        <li><button>Delete</button></li>
+                                        <li><button onClick={()=>handledelete(user?._id)}>Delete</button></li>
                                     </ul>
                                 </div>
                             </div>
