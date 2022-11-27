@@ -67,7 +67,11 @@ const Alluser = () => {
     const handledelete = (id) => {
 
 
-        request.delete(`/user/${id}`)
+        request.delete(`/user/${id}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            }
+        })
             .then(data => {
                 console.log(data);
                 // if (data.deletedCount > 0) {

@@ -38,7 +38,10 @@ const BookNowModal = ({ bikedetails, setBikedetails }) => {
         fetch(`https://bike-hut-server.vercel.app/book`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+               
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            
             },
             body: JSON.stringify(bookedDetails)
         })

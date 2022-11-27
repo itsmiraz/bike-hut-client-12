@@ -48,7 +48,10 @@ const AllBuyers = () => {
 
 
         fetch(`https://bike-hut-server.vercel.app/user/${id}`, {
-            method:"DELETE"
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
