@@ -38,10 +38,8 @@ const BikeCard = ({ bike, setBikedetails }) => {
     const { data: seller = [], } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch(`https://bike-hut-server.vercel.app/user?email=${user?.email}`, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
-                }
+            const res = await fetch(`https://bike-hut-server.vercel.app/user`, {
+             
             })
             const data = await res.json()
             const users = data.filter(user => user.email === sellerEmail)
