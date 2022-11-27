@@ -3,10 +3,11 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import BikeCard from '../../../Components/BikeCard/BikeCard';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 
 const ReportedItems = () => {
-
+    useTitle('Reported Items')
     const { data: reported, isLoading ,refetch} = useQuery({
         queryKey: ['reportedbikes'],
         queryFn: async () => {

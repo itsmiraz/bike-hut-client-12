@@ -3,15 +3,17 @@ import React from 'react';
 import { useContext } from 'react';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 
 const UserPage = () => {
+    useTitle('Profile')
     const { user,logOut } = useContext(AuthContext)
     const { data: userdb, isLoading } = useQuery({
         queryKey: ['user'],
         queryFn: async () => {
             try {
-                const { data } = await request.get(`user?email=${user?.email}`, {
+                const { data } = await request.get(`/user?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('bikehutAccessToken')}`
                     }

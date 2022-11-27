@@ -10,7 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { PropagateLoader, PulseLoader } from 'react-spinners';
 
 import { useState } from 'react';
+import useTitle from '../../../Hooks/useTitle/useTitle';
+
 const AddAproduct = () => {
+
+    useTitle('Add A Product')
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imgHostKey = process.env.REACT_APP_imgbbKey
     const { user } = useContext(AuthContext)

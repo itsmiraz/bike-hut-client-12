@@ -3,12 +3,13 @@ import React from 'react';
 import { useContext } from 'react';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import MybuyersCard from './MybuyersCard';
 
 const Mybuyers = () => {
 
     const { user } = useContext(AuthContext)
-
+    useTitle('My Buyers')
     const { data: buyers, isLoading } = useQuery({
         queryKey: ['buyers', user?.email],
         queryFn: async () => {

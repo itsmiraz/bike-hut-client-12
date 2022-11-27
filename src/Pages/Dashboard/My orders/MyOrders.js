@@ -6,11 +6,12 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 import MyOrdersCard from './MyOrdersCard';
 
 const MyOrders = () => {
-
+    useTitle('My Orders')
     const {user,logOut} = useContext(AuthContext)
     // /booked?email=${user?.email}
     const { data:bookedBikes,isLoading ,refetch} = useQuery({

@@ -4,12 +4,13 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import { BarLoader } from 'react-spinners';
+import useTitle from "../../Hooks/useTitle/useTitle";
 
 
 const Login = () => {
   // userContext
   const { signIn, googleSginIn, } = useContext(AuthContext);
-
+  useTitle('Login')
   const {
     register,
     handleSubmit,

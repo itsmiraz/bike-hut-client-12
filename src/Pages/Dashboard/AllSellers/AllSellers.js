@@ -4,10 +4,12 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 
 const AllSellers = () => {
 
+    useTitle('ALL Sellers')
 
     const {user,logOut} = useContext(AuthContext)
 

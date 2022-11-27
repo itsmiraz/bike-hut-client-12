@@ -2,15 +2,14 @@ import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 
 const AllBuyers = () => {
-
+    useTitle('All Buyers')
     const {user,logOut} = useContext(AuthContext)
     
 

@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BikeCard from '../../Components/BikeCard/BikeCard';
 import { AuthContext } from '../../Context/UserContext';
+import useTitle from '../../Hooks/useTitle/useTitle';
 import BookNowModal from './BookNowModal';
 
 const Bikes = () => {
+    useTitle('Bike')
     const data = useLoaderData()
     const {user} = useContext(AuthContext)
     const [bikedetails, setBikedetails] = useState(null)

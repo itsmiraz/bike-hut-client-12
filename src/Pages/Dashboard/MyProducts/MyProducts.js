@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import EditProductDetails from './EditProductDetails';
 import MyBikesCard from './MyBikesCard';
 
@@ -14,7 +15,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext)
     const [bikedetails, setbikedetails] = useState(null)
     
-
+    useTitle('My Products')
 
     const {data:bikes,isLoading ,refetch} = useQuery({
         queryKey: ['bikes', user?.email],

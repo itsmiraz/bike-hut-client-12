@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 import { BarLoader } from 'react-spinners';
+import useTitle from '../../Hooks/useTitle/useTitle';
 
 
 const Regiseter = () => {
-
+    useTitle('Register')
     const [err, setErr] = useState('')
     const navigate = useNavigate()
     const location = useLocation()

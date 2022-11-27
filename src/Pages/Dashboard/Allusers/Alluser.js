@@ -5,11 +5,13 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import LoadingAnimation from '../../../Components/LoadingAnimation/LoadingAnimation';
 import { AuthContext } from '../../../Context/UserContext';
+import useTitle from '../../../Hooks/useTitle/useTitle';
 import request from '../../../http-common';
 
 
 
 const Alluser = () => {
+    useTitle('All Users')
     const { user, logOut } = useContext(AuthContext)
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['sellers',user?.email],
