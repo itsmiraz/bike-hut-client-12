@@ -98,7 +98,7 @@ const MyProducts = () => {
                 <p className='font-semibold text-xs my-4 text-center'>Wand To <Link to='/dashboard/addaproduct' className='underline'>add a Product</Link></p>
                 </>
             }
-            <div className='px-4'>
+            <div className='px-4 md:px-32'>
                 {/* BIKEs Card  */}
                 {
                     bikes.map(bike => <MyBikesCard

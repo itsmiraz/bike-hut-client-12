@@ -4,15 +4,16 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
-// import useToken from '../../Hooks/useToken';
+import { BarLoader } from 'react-spinners';
+
 
 const Regiseter = () => {
 
     const [err, setErr] = useState('')
-    const [createdUserEmail, setuserEmail] = useState('')
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
+    const [registerAnimation, setRegisterAnimation] = useState(false)
 
    
 
@@ -34,6 +35,7 @@ const Regiseter = () => {
 
                 updateUser(userInfo)
                     .then(() => {
+                        setRegisterAnimation(true)
                         saveUser(data.name, data.email,data.accountType);
                     })
                     .catch(err => console.log(err));
@@ -50,7 +52,7 @@ const Regiseter = () => {
     // save user to db
     const saveUser = (name, email ,role) => {
         const user = { name, email,role }
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://bike-hut-server.vercel.app/user/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -59,10 +61,10 @@ const Regiseter = () => {
         })
             .then(res => res.json())
             .then(data => {
-            
-                    localStorage.setItem('bikehutAccessToken', data.data)
-                    setTimeout(() => {
-                        navigate(from, { replace: true })
+                localStorage.setItem('bikehutAccessToken', data.data)
+                setTimeout(() => {
+                    navigate(from, { replace: true })
+                    setRegisterAnimation(false)
 
                     }, 300);
                   
@@ -73,7 +75,23 @@ const Regiseter = () => {
 
     return (
         <div>
-            <div className='flex px-4 justify-center h-[600px] items-center'>
+            {
+                registerAnimation ?
+                <>
+                <div className="w-full flex justify-center h-[600px]">
+                  <div className="flex flex-col justify-center">
+                  <p className="text-xl text-gray-600 font-semibold my-10">
+                    Logining
+                  </p>
+    
+                  <BarLoader color="#0dccde" />
+                 </div>
+                </div>
+              </>
+                    :
+                    <>
+                    
+                    <div className='flex px-4 justify-center h-[600px] items-center'>
                 <div className='w-full md:w-96'>
                     <h1 className='text-xl text-center font-bold my-10'>Sign Up</h1>
                     <form onSubmit={handleSubmit(handleSignup)}>
@@ -124,6 +142,10 @@ const Regiseter = () => {
 
                 </div>
             </div>
+                    </>
+            }
+          
+          
         </div>
     );
 };

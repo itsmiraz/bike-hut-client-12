@@ -16,6 +16,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbiked
         sellerNumber,
         sellerLocation,
         status,
+        paid,
 
     } = bike;
 
@@ -41,7 +42,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbiked
                 </div>
                 <div>
                     {
-                        status === 'available' ?
+                        status === 'available' && paid ==='false' ?
                             <>
                                 <p className='bg-green-500 text-white rounded-full px-3'>Available</p>
                             </>
@@ -78,7 +79,7 @@ const MyBikesCard = ({ bike, handleDelete, handleSold, handleAdvertise, setbiked
                         </label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-gray-100 rounded-box w-52">
 
-                            {status === 'available' && <>
+                            {status === 'available' && paid ==='false' && <>
                                 <li>
                                     <button onClick={() => handleSold(_id)} >
                                         Sold
